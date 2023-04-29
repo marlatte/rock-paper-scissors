@@ -7,7 +7,7 @@ Scissors beats Paper
 If I write  it from the user's POV, instead  of  checking  every possible combination, it starts by checking playerSelection first, then compares with computerSelection.
 
 The basic set of functions:
-rockPaperScissors()
+game()
     playRound()
         getComputerChoice()
         getPlayerChoice()
@@ -34,9 +34,11 @@ rockPaperScissors()
 
 
 To create a 5-round game, I'll need  a for loop with i < 5.
-Save the outcome for each in a variable. Maybe `Round ${i + 1} goes to ${winner}`
-    winner will be dependent on outcome
-        let winner = outcome === "win" ? "User" : "Computer";
+Save the outcome for each in a variable. Maybe `Round ${i + 1} goes to ${roundWinner}`
+    roundWinner will be dependent on outcome
+        let roundWinner = outcome === "win" ? "User" : "Computer";
+
+Save all results for that 5-round game to an array to keep score and announce a gameWinner.
 */
 
 
