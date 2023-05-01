@@ -6,8 +6,7 @@ Scissors beats Paper
 
 If I write  it from the user's POV, instead  of  checking  every possible combination, it starts by checking playerSelection first, then compares with computerSelection.
 
-The basic set of functions:
-game()
+The basic set of functions for 1 round:
     playRound()
         getComputerChoice()
         getPlayerChoice()
@@ -36,9 +35,46 @@ game()
 To create a 5-round game, I'll need  a for loop with i < 5.
 Save the outcome for each in a variable. Maybe `Round ${i + 1} goes to ${roundWinner}`
     roundWinner will be dependent on outcome
-        let roundWinner = outcome === "win" ? "User" : "Computer";
+        let roundWinner = whoWon()
+            return outcome === "win" ? "User" : "Computer";
 
-Save all results for that 5-round game to an array to keep score and announce a gameWinner.
+Use counter variables for player/computer that goes up by one when they win. After 5 games (or one side reaches 3 wins), the score that's higher is the gameWinner.
+So playerScore/computerScore will be dependent on roundWinner. Then gameWinner will result from an if statement about the counters.
+
+Variables: playerScore, computerScore, gameWinner, roundWinner,
+
+game()
+    let playerScore = 0;
+    let computerScore = 0;
+    for i < 5 {
+        playRound()
+            return outcome
+        let roundWinner = whoWon(outcome)
+            if (outcome === "win") {
+                roundWinner = "Player"
+            } else if (outcome === lose) {
+                roundWinner = "Computer"
+            } else {
+                roundWinner = "no one"
+            }
+        console.log(`Round ${i + 1} goes to ${roundWinner}!`)
+        if (roundWinner === "Player") {
+            playerScore++
+        } else if (roundWinner === "Computer") {
+            computerScore++
+        }
+        printScores()
+            console.log(`Player Score: ${playerScore}`)
+            console.log(`Computer Score: ${computerScore}`)
+        if (playerScore or computerScore >= 3)  {
+            Exit the for loop
+        }
+    }
+    if (playerScore > computerScore) {
+        You win
+    } else {
+        You lose
+    }
 */
 
 
@@ -52,13 +88,12 @@ function generateRandomInts(lowerLimit, upperLimit, amount = 1) {
 
 function getComputerChoice() {    
     const choices = ["Rock", "Paper", "Scissors"];
-    let computerChoice = choices[generateRandomInts(0, 3)];
-    console.log(`Computer selects: ${computerChoice}`);
-    return computerChoice;
+    let computerSelection = choices[generateRandomInts(0, 3)];
+    return computerSelection;
 }
 
 function getPlayerChoice() {
-    let playerChoice;
+    let playerSelection = "";
     let promptAgain = confirm("Ready to play?");
     while (promptAgain) {
         let playerInput = prompt("What do you choose?", "").toLowerCase();
@@ -69,17 +104,17 @@ function getPlayerChoice() {
                 break;
         
             case "rock":
-                playerChoice = "Rock";
+                playerSelection = "Rock";
                 promptAgain = false;
                 break;
     
             case "paper":
-                playerChoice = "Paper";
+                playerSelection = "Paper";
                 promptAgain = false;
                 break;
 
             case "scissors":
-                playerChoice = "Scissors";
+                playerSelection = "Scissors";
                 promptAgain = false;
                 break;
     
@@ -89,8 +124,12 @@ function getPlayerChoice() {
                 break;
         }
     }
-    console.log(`Player selects: ${playerChoice}`);
-    return playerChoice;
+    return playerSelection;
+}
+
+function printSelections(playerSelection, computerSelection) {
+    console.log(`Player selects: ${playerSelection}`);
+    console.log(`Computer selects: ${computerSelection}`);
 }
 
 function checkWin(playerSelection, computerSelection) {
@@ -127,19 +166,31 @@ function checkOutcome(isWin, playerSelection, computerSelection) {
     return [outcome, winningHand, losingHand]
 }
 
-function printOutcome(outcome, winningHand, losingHand) {
-    console.log(`You ${outcome}! ${winningHand} beats ${losingHand}.`)
-}
+// function printOutcome(outcome, winningHand, losingHand) {
+//     let roundMessage = `You ${outcome}! ${winningHand} beats ${losingHand}.`;
+//     return roundMessage;
+// }
 
 function playRound() {
     let playerSelection = getPlayerChoice();
     let computerSelection = getComputerChoice();
     let isTie = (playerSelection === computerSelection);
-    if (isTie) {
-        return "It's a tie. Try Again."
+    if (playerSelection === "") {
+        return "Game cancelled.";
+    }
+    else if (isTie) {
+        printSelections(playerSelection, computerSelection);
+        let outcome = "tie"
+        console.log("It's a tie.")
+        return outcome;
     } else {
+        printSelections(playerSelection, computerSelection);
         let isWin = checkWin(playerSelection,  computerSelection);
-        let resultArray  = checkOutcome(isWin, playerSelection, computerSelection);
-        printOutcome(resultArray[0], resultArray[1], resultArray[2]);
+        let resultArray = checkOutcome(isWin, playerSelection, computerSelection);
+        let outcome = resultArray[0];
+        let winningHand = resultArray[1];
+        let losingHand  = resultArray[2];
+        console.log(`You ${outcome}! ${winningHand} beats ${losingHand}.`);
+        return outcome;
     };
 }
