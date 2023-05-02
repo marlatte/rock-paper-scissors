@@ -216,38 +216,46 @@ function printScores(playerScore, computerScore, roundNumber) {
  }
 
  function game(gameLength = 5) {
-    prompt(`Let's play! Best of ${gameLength}?`, gameLength)
     let playerScore = 0;
     let computerScore = 0;
-    let mercyRule = gameLength/2
-    for (let i = 0; i < gameLength; i++) {
-        let roundNumber = i + 1;
-        let roundOutcome  = playRound(roundNumber);
-        if (roundOutcome === "cancelled") {
-            console.log(`Game cancelled in round ${roundNumber}`)
-            i = gameLength;
-        } else {
-            let roundWinner = whoWon(roundOutcome)      
-            alert(`(${roundNumber}) Round ${roundNumber} goes to ${roundWinner}!`)
-            console.log(`(${roundNumber}) Round ${roundNumber} goes to ${roundWinner}!`)
-            if (roundWinner === "Player") {
-                playerScore++;
-            } else if (roundWinner === "Computer") {
-                computerScore++;
-            }
-            printScores(playerScore, computerScore, roundNumber);
-            if (playerScore >= 3 || computerScore >= 3)  {
-                gameLength = i;
-            } else if (i === (gameLength - 1) && playerScore  === computerScore) {
-                alert("Tie breaker!");
-                gameLength++;
+    let mercyRule = gameLength/2;
+    let roundNumber;
+    let roundOutcome;
+    gameLength = prompt(`Let's play! Best of ${gameLength}?`, gameLength)
+    if (gameLength ===  null) {
+        roundOutcome = "cancelled"
+    } else {
+        for (let i = 0; i < gameLength; i++) {
+            roundNumber = i + 1;
+            roundOutcome  = playRound(roundNumber);
+            if (roundOutcome === "cancelled") {
+                console.log(`Game cancelled in round ${roundNumber}`)
+                i = gameLength;
+            } else {
+                let roundWinner = whoWon(roundOutcome)      
+                alert(`(${roundNumber}) Round ${roundNumber} goes to ${roundWinner}!`)
+                console.log(`(${roundNumber}) Round ${roundNumber} goes to ${roundWinner}!`)
+                if (roundWinner === "Player") {
+                    playerScore++;
+                } else if (roundWinner === "Computer") {
+                    computerScore++;
+                }
+                printScores(playerScore, computerScore, roundNumber);
+                if (playerScore > mercyRule || computerScore >mercyRule)  {
+                    gameLength = i; 
+                    // Should there be a way to invoke the mercy rule if the losing side can't possibly catch up? Eg. if player is losing 2-4 in round 8 of a 9-round game, there's no point in playing round 9.
+                    // NO! That's too much requirements creep.
+                } else if (i === (gameLength - 1) && playerScore  === computerScore) {
+                    alert("Tie breaker!");
+                    gameLength++;
+                }
             }
         }
     }
     if (roundOutcome != "cancelled" && playerScore > computerScore) {
-        console.log(`You win! ${playerScore} - ${computerScore}`)
+        console.log(`You win! ${playerScore} - ${computerScore} in ${roundNumber} rounds.`)
     } else if (roundOutcome != "cancelled" && playerScore < computerScore) {
-        console.log(`You lose! ${playerScore} - ${computerScore}`)
+        console.log(`You lose! ${playerScore} - ${computerScore} in ${roundNumber} rounds.`)
     } else {
         return `Game ${roundOutcome}.`
     }
