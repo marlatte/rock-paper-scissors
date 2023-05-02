@@ -92,9 +92,9 @@ function getComputerChoice() {
     return computerSelection;
 }
 
-function getPlayerChoice() {
+function getPlayerChoice(roundNumber) {
     let playerSelection = "";
-    let promptAgain = confirm("Ready to play?");
+    let promptAgain = confirm(`Ready for Round ${roundNumber}?`);
     while (promptAgain) {
         let playerInput = prompt("What do you choose?", "");
         if (playerInput === null) {
@@ -134,9 +134,9 @@ function getPlayerChoice() {
     return playerSelection;
 }
 
-function printSelections(playerSelection, computerSelection) {
-    console.log(`Player selects: ${playerSelection}`);
-    console.log(`Computer selects: ${computerSelection}`);
+function printSelections(playerSelection, computerSelection, roundNumber) {
+    console.log(`(${roundNumber}) Player selects: ${playerSelection}`);
+    console.log(`(${roundNumber}) Computer selects: ${computerSelection}`);
 }
 
 function checkWin(playerSelection, computerSelection) {
@@ -173,8 +173,8 @@ function checkOutcome(isWin, playerSelection, computerSelection) {
     return [roundOutcome, winningHand, losingHand]
 }
 
-function playRound() {
-    let playerSelection = getPlayerChoice();
+function playRound(roundNumber) {
+    let playerSelection = getPlayerChoice(roundNumber);
     let computerSelection = getComputerChoice();
     let isTie = (playerSelection === computerSelection);
     if (playerSelection === "") {
@@ -183,24 +183,23 @@ function playRound() {
         return roundOutcome;
     }
     else if (isTie) {
-        printSelections(playerSelection, computerSelection);
+        printSelections(playerSelection, computerSelection,roundNumber);
         roundOutcome = "tie"
-        console.log("It's a tie.")
+        console.log(`(${roundNumber}) It's a tie.`)
         return roundOutcome;
     } else {
-        printSelections(playerSelection, computerSelection);
+        printSelections(playerSelection, computerSelection, roundNumber);
         let isWin = checkWin(playerSelection,  computerSelection);
         let resultArray = checkOutcome(isWin, playerSelection, computerSelection);
         let roundOutcome = resultArray[0];
         let winningHand = resultArray[1];
         let losingHand  = resultArray[2];
-        console.log(`You ${roundOutcome}! ${winningHand} beats ${losingHand}.`);
+        console.log(`(${roundNumber}) You ${roundOutcome}! ${winningHand} beats ${losingHand}.`);
         return roundOutcome;
     };
 }
 
 function whoWon(roundOutcome) {
-    alert("inside whoWon")
     if (roundOutcome === "win") {
         roundWinner = "Player";
     } else if (roundOutcome === "lose") {
@@ -211,40 +210,44 @@ function whoWon(roundOutcome) {
     return roundWinner;
 }
 
-function printScores(playerScore, computerScore) {
-    console.log(`Player Score: ${playerScore}`)
-    console.log(`Computer Score: ${computerScore}`)
+function printScores(playerScore, computerScore, roundNumber) {
+    console.log(`(${roundNumber}) Player Score: ${playerScore}`)
+    console.log(`(${roundNumber}) Computer Score: ${computerScore}`)
  }
 
- function game() {
+ function game(gameLength = 5) {
+    prompt(`Let's play! Best of ${gameLength}?`, gameLength)
     let playerScore = 0;
     let computerScore = 0;
-    for (let i = 0; i < 5; i++) {
-        let roundOutcome  = playRound();
+    let mercyRule = gameLength/2
+    for (let i = 0; i < gameLength; i++) {
+        let roundNumber = i + 1;
+        let roundOutcome  = playRound(roundNumber);
         if (roundOutcome === "cancelled") {
-            console.log(`Game cancelled in round ${i + 1}`)
-            i = 5;
+            console.log(`Game cancelled in round ${roundNumber}`)
+            i = gameLength;
         } else {
             let roundWinner = whoWon(roundOutcome)      
-            console.log(`Round ${i + 1} goes to ${roundWinner}!`)
+            alert(`(${roundNumber}) Round ${roundNumber} goes to ${roundWinner}!`)
+            console.log(`(${roundNumber}) Round ${roundNumber} goes to ${roundWinner}!`)
             if (roundWinner === "Player") {
                 playerScore++;
             } else if (roundWinner === "Computer") {
                 computerScore++;
             }
-            printScores(playerScore, computerScore);
+            printScores(playerScore, computerScore, roundNumber);
             if (playerScore >= 3 || computerScore >= 3)  {
-                i = 5;
-            } else if (i = 4 && playerScore  === computerScore) {
+                gameLength = i;
+            } else if (i === (gameLength - 1) && playerScore  === computerScore) {
                 alert("Tie breaker!");
-                i = 3;
+                gameLength++;
             }
         }
     }
-    if (playerScore > computerScore) {
-        console.log("You win!")
-    } else if (playerScore < computerScore) {
-        console.log("You lose!")
+    if (roundOutcome != "cancelled" && playerScore > computerScore) {
+        console.log(`You win! ${playerScore} - ${computerScore}`)
+    } else if (roundOutcome != "cancelled" && playerScore < computerScore) {
+        console.log(`You lose! ${playerScore} - ${computerScore}`)
     } else {
         return `Game ${roundOutcome}.`
     }
