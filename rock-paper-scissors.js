@@ -243,7 +243,9 @@ function printScores(playerScore, computerScore, roundNumber) {
                 printScores(playerScore, computerScore, roundNumber);
                 if (playerScore > mercyRule || computerScore >mercyRule)  {
                     gameLength = i; 
-                    // Should there be a way to invoke the mercy rule if the losing side can't possibly catch up? Eg. if player is losing 2-4 in round 8 of a 9-round game, there's no point in playing round 9.
+                    /*Should there be a way to invoke the mercy rule if the losing side can't possibly catch up? 
+                    Eg. if player is losing 2-4 in round 8 of a 9-round game, there's no point in playing round 9. */
+                    
                     // NO! That's too much requirements creep.
                 } else if (i === (gameLength - 1) && playerScore  === computerScore) {
                     alert("Tie breaker!");
