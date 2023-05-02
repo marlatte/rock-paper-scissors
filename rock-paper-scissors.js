@@ -96,10 +96,17 @@ function getPlayerChoice() {
     let playerSelection = "";
     let promptAgain = confirm("Ready to play?");
     while (promptAgain) {
-        let playerInput = prompt("What do you choose?", "").toLowerCase();
-        switch (playerInput) {
+        let playerInput = prompt("What do you choose?", "");
+        if (playerInput === null) {
+            playerInput = "exit";
+        }
+        switch (playerInput.toLowerCase()) {
+            case "exit":
+                promptAgain = false;
+                break;
+
             case "":
-                console.log("You have to make a choice!");
+                alert("You have to make a choice! \nTry Again");
                 promptAgain = true
                 break;
         
@@ -119,8 +126,8 @@ function getPlayerChoice() {
                 break;
     
             default:
-                console.log("Not a valid choice.")
-                promptAgain = false;
+                alert("Not a valid choice. \nTry Again")
+                promptAgain = true;
                 break;
         }
     }
@@ -165,11 +172,6 @@ function checkOutcome(isWin, playerSelection, computerSelection) {
     let losingHand = (isWin ? computerSelection : playerSelection);
     return [outcome, winningHand, losingHand]
 }
-
-// function printOutcome(outcome, winningHand, losingHand) {
-//     let roundMessage = `You ${outcome}! ${winningHand} beats ${losingHand}.`;
-//     return roundMessage;
-// }
 
 function playRound() {
     let playerSelection = getPlayerChoice();
