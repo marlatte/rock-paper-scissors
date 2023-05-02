@@ -24,19 +24,19 @@ The basic set of functions for 1 round:
                     didScissorsWin()
                         let scissorsWin = computerSelection === "Paper" ? true : false;
         checkOutcome()
-            let outcome = (isWin ? "win" : "lose");
+            let roundOutcome = (isWin ? "win" : "lose");
             let winningHand = (isWin ? playerSelection: computerSelection);
             let losingHand = (isWin ? computerSelection : playerSelection);
         printOutcome()
-            `You ${outcome}! ${winningHand} beats ${losingHand}.`
+            `You ${roundOutcome}! ${winningHand} beats ${losingHand}.`
 
 
 
 To create a 5-round game, I'll need  a for loop with i < 5.
-Save the outcome for each in a variable. Maybe `Round ${i + 1} goes to ${roundWinner}`
-    roundWinner will be dependent on outcome
+Save the roundOutcome for each in a variable. Maybe `Round ${i + 1} goes to ${roundWinner}`
+    roundWinner will be dependent on roundOutcome
         let roundWinner = whoWon()
-            return outcome === "win" ? "User" : "Computer";
+            return roundOutcome === "win" ? "User" : "Computer";
 
 Use counter variables for player/computer that goes up by one when they win. After 5 games (or one side reaches 3 wins), the score that's higher is the gameWinner.
 So playerScore/computerScore will be dependent on roundWinner. Then gameWinner will result from an if statement about the counters.
@@ -48,11 +48,11 @@ game()
     let computerScore = 0;
     for i < 5 {
         playRound()
-            return outcome
-        let roundWinner = whoWon(outcome)
-            if (outcome === "win") {
+            return roundOutcome
+        let roundWinner = whoWon(roundOutcome)
+            if (roundOutcome === "win") {
                 roundWinner = "Player"
-            } else if (outcome === lose) {
+            } else if (roundOutcome === lose) {
                 roundWinner = "Computer"
             } else {
                 roundWinner = "no one"
@@ -167,32 +167,35 @@ function checkWin(playerSelection, computerSelection) {
     }
 
 function checkOutcome(isWin, playerSelection, computerSelection) {
-    let outcome = (isWin ? "win" : "lose");
+    let roundOutcome = (isWin ? "win" : "lose");
     let winningHand = (isWin ? playerSelection: computerSelection);
     let losingHand = (isWin ? computerSelection : playerSelection);
-    return [outcome, winningHand, losingHand]
+    return [roundOutcome, winningHand, losingHand]
 }
 
 function playRound() {
     let playerSelection = getPlayerChoice();
     let computerSelection = getComputerChoice();
     let isTie = (playerSelection === computerSelection);
+    let roundOutcome;
     if (playerSelection === "") {
-        return "Game cancelled.";
+        console.log("Round cancelled.")
+        roundOutcome = "cancelled"
+        return roundOutcome;
     }
     else if (isTie) {
         printSelections(playerSelection, computerSelection);
-        let outcome = "tie"
+        roundOutcome = "tie"
         console.log("It's a tie.")
-        return outcome;
+        return roundOutcome;
     } else {
         printSelections(playerSelection, computerSelection);
         let isWin = checkWin(playerSelection,  computerSelection);
         let resultArray = checkOutcome(isWin, playerSelection, computerSelection);
-        let outcome = resultArray[0];
+        let roundOutcome = resultArray[0];
         let winningHand = resultArray[1];
         let losingHand  = resultArray[2];
-        console.log(`You ${outcome}! ${winningHand} beats ${losingHand}.`);
-        return outcome;
+        console.log(`You ${roundOutcome}! ${winningHand} beats ${losingHand}.`);
+        return roundOutcome;
     };
 }
