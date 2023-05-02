@@ -67,7 +67,7 @@ game()
             console.log(`Player Score: ${playerScore}`)
             console.log(`Computer Score: ${computerScore}`)
         if (playerScore or computerScore >= 3)  {
-            Exit the for loop
+            i = 5;
         }
     }
     if (playerScore > computerScore) {
@@ -177,7 +177,6 @@ function playRound() {
     let playerSelection = getPlayerChoice();
     let computerSelection = getComputerChoice();
     let isTie = (playerSelection === computerSelection);
-    let roundOutcome;
     if (playerSelection === "") {
         console.log("Round cancelled.")
         roundOutcome = "cancelled"
@@ -198,4 +197,55 @@ function playRound() {
         console.log(`You ${roundOutcome}! ${winningHand} beats ${losingHand}.`);
         return roundOutcome;
     };
+}
+
+function whoWon(roundOutcome) {
+    alert("inside whoWon")
+    if (roundOutcome === "win") {
+        roundWinner = "Player";
+    } else if (roundOutcome === "lose") {
+        roundWinner = "Computer";
+    } else {
+        roundWinner = "no one";
+    }
+    return roundWinner;
+}
+
+function printScores(playerScore, computerScore) {
+    console.log(`Player Score: ${playerScore}`)
+    console.log(`Computer Score: ${computerScore}`)
+ }
+
+ function game() {
+    let playerScore = 0;
+    let computerScore = 0;
+    for (let i = 0; i < 5; i++) {
+        let roundOutcome  = playRound();
+        if (roundOutcome === "cancelled") {
+            console.log(`Game cancelled in round ${i + 1}`)
+            i = 5;
+        } else {
+            let roundWinner = whoWon(roundOutcome)      
+            console.log(`Round ${i + 1} goes to ${roundWinner}!`)
+            if (roundWinner === "Player") {
+                playerScore++;
+            } else if (roundWinner === "Computer") {
+                computerScore++;
+            }
+            printScores(playerScore, computerScore);
+            if (playerScore >= 3 || computerScore >= 3)  {
+                i = 5;
+            } else if (i = 4 && playerScore  === computerScore) {
+                alert("Tie breaker!");
+                i = 3;
+            }
+        }
+    }
+    if (playerScore > computerScore) {
+        console.log("You win!")
+    } else if (playerScore < computerScore) {
+        console.log("You lose!")
+    } else {
+        return `Game ${roundOutcome}.`
+    }
 }
