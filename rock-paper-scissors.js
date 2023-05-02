@@ -24,9 +24,9 @@ The basic set of functions for 1 round:
                     didScissorsWin()
                         let scissorsWin = computerSelection === "Paper" ? true : false;
         checkOutcome()
-            let roundOutcome = (isWin ? "win" : "lose");
-            let winningHand = (isWin ? playerSelection: computerSelection);
-            let losingHand = (isWin ? computerSelection : playerSelection);
+            let roundOutcome = (playerWin ? "win" : "lose");
+            let winningHand = (playerWin ? playerSelection: computerSelection);
+            let losingHand = (playerWin ? computerSelection : playerSelection);
         printOutcome()
             `You ${roundOutcome}! ${winningHand} beats ${losingHand}.`
 
@@ -140,15 +140,15 @@ function printSelections(playerSelection, computerSelection, roundNumber) {
 }
 
 function checkWin(playerSelection, computerSelection) {
-    let isWin;
+    let playerWin;
     if (playerSelection === "Rock") {
-        isWin = didRockWin(computerSelection);
+        playerWin = didRockWin(computerSelection);
     } else if (playerSelection === "Paper") {
-        isWin = didPaperWin(computerSelection);
+        playerWin = didPaperWin(computerSelection);
     } else if (playerSelection === "Scissors") {
-        isWin = didScissorsWin(computerSelection);
+        playerWin = didScissorsWin(computerSelection);
     }
-    return isWin;
+    return playerWin;
 }
 
     function didRockWin(computerSelection) {
@@ -166,31 +166,31 @@ function checkWin(playerSelection, computerSelection) {
         return  scissorsWin;
     }
 
-function checkOutcome(isWin, playerSelection, computerSelection) {
-    let roundOutcome = (isWin ? "win" : "lose");
-    let winningHand = (isWin ? playerSelection: computerSelection);
-    let losingHand = (isWin ? computerSelection : playerSelection);
+function checkOutcome(playerWin, playerSelection, computerSelection) {
+    let roundOutcome = (playerWin ? "win" : "lose");
+    let winningHand = (playerWin ? playerSelection: computerSelection);
+    let losingHand = (playerWin ? computerSelection : playerSelection);
     return [roundOutcome, winningHand, losingHand]
 }
 
 function playRound(roundNumber) {
     let playerSelection = getPlayerChoice(roundNumber);
     let computerSelection = getComputerChoice();
-    let isTie = (playerSelection === computerSelection);
+    let tieGame = (playerSelection === computerSelection);
     if (playerSelection === "") {
         console.log("Round cancelled.")
         roundOutcome = "cancelled"
         return roundOutcome;
     }
-    else if (isTie) {
+    else if (tieGame) {
         printSelections(playerSelection, computerSelection,roundNumber);
         roundOutcome = "tie"
         console.log(`(${roundNumber}) It's a tie.`)
         return roundOutcome;
     } else {
         printSelections(playerSelection, computerSelection, roundNumber);
-        let isWin = checkWin(playerSelection,  computerSelection);
-        let resultArray = checkOutcome(isWin, playerSelection, computerSelection);
+        let playerWin = checkWin(playerSelection,  computerSelection);
+        let resultArray = checkOutcome(playerWin, playerSelection, computerSelection);
         let roundOutcome = resultArray[0];
         let winningHand = resultArray[1];
         let losingHand  = resultArray[2];
