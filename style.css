@@ -1,0 +1,27 @@
+/* * {
+	border: 1px solid red;
+} */
+
+body {
+	display: flex;
+	flex-direction: column;
+	align-items:center;
+	background-color: black;
+	color: #13e907;
+	font-family: 'Courier New', Courier, monospace;
+}
+
+button {
+	padding: 5px;
+	margin: 10px;
+}
+
+.scoreboard {
+	border: 2px solid #13e907;
+	height: 100px;
+	width: 100px;
+}
+
+.current-round {
+	color: aqua;
+}
