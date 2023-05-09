@@ -1,4 +1,5 @@
-const buttons = document.querySelectorAll("button");
+const gameButtons = document.querySelectorAll(".game button");
+const resetButton = document.querySelector(".play-again");
 let scoreboard = document.querySelector(".scoreboard");
 let roundNumber = 1;
 let playerScore = +document.querySelector(".player .score").textContent;
@@ -83,53 +84,6 @@ function printScores(playerScore, computerScore, roundNumber) {
     console.log(`(${roundNumber}) Computer Score: ${computerScore}`)
  }
 
-//  function game(gameLength = 5) {
-
-//     let mercyRule = gameLength/2;
-//     let roundNumber;
-//     let roundOutcome;
-//     gameLength = prompt(`Let's play! Best of ${gameLength}?`, gameLength)
-//     if (gameLength ===  null) {
-//         roundOutcome = "cancelled"
-//     } else {
-//         for (let i = 0; i < gameLength; i++) {
-//             roundNumber = i + 1;
-//             roundOutcome  = playRound(roundNumber);
-//             if (roundOutcome === "cancelled") {
-//                 console.log(`Game cancelled in round ${roundNumber}`)
-//                 i = gameLength;
-//             } else {
-//                 let roundWinner = whoWon(roundOutcome)      
-//                 alert(`(${roundNumber}) Round ${roundNumber} goes to ${roundWinner}!`)
-//                 console.log(`(${roundNumber}) Round ${roundNumber} goes to ${roundWinner}!`)
-//                 if (roundWinner === "Player") {
-//                     playerScore++;
-//                 } else if (roundWinner === "Computer") {
-//                     computerScore++;
-//                 }
-//                 printScores(playerScore, computerScore, roundNumber);
-//                 if (playerScore > mercyRule || computerScore >mercyRule)  {
-//                     gameLength = i; 
-//                     /*Should there be a way to invoke the mercy rule if the losing side can't possibly catch up? 
-//                     Eg. if player is losing 2-4 in round 8 of a 9-round game, there's no point in playing round 9. */
-                    
-//                     // NO! That's too much requirements creep.
-//                 } else if (i === (gameLength - 1) && playerScore  === computerScore) {
-//                     alert("Tie breaker!");
-//                     gameLength++;
-//                 }
-//             }
-//         }
-//     }
-//     if (roundOutcome != "cancelled" && playerScore > computerScore) {
-//         console.log(`You win! ${playerScore} - ${computerScore} in ${roundNumber} rounds.`)
-//     } else if (roundOutcome != "cancelled" && playerScore < computerScore) {
-//         console.log(`You lose! ${playerScore} - ${computerScore} in ${roundNumber} rounds.`)
-//     } else {
-//         return `Game ${roundOutcome}.`
-//     }
-// }
-
 function updateScores(roundOutcome) {
 	if (roundOutcome === "tie") {
 		return
@@ -140,12 +94,29 @@ function updateScores(roundOutcome) {
 	} else if (roundOutcome === "lose") {
 		document.querySelector(".computer .score").textContent = ++computerScore;
 		return computerScore;
-	} else {
-		resetGame();
 	}
 }
 
-buttons.forEach(button => {
+function removeTransition(e) {
+	if (e.propertyName !== "scale") return;
+	this.classList.remove("clicked");
+}
+
+function resetGame() {
+	playerScore = 0;
+	document.querySelector(".player .score").textContent = playerScore;
+	computerScore = 0;
+	document.querySelector(".computer .score").textContent = computerScore;
+	roundNumber = 1;
+	document.querySelector(".round-number .counter").textContent = roundNumber - 1;
+	document.querySelector(".player .selects").textContent = "__";
+    document.querySelector(".computer .selects").textContent = "__";
+	document.querySelector(".round-outcome").textContent = "Outcome"
+	document.querySelector(".game").classList.remove("invisible");
+	document.querySelector(".game-over-container").classList.add("invisible");
+}
+
+gameButtons.forEach(button => {
 	button.addEventListener("click", (e) => {
 		let playerSelection = e.target.id;
 		document.querySelector(`#${playerSelection}`).classList.add("clicked");
@@ -166,28 +137,28 @@ buttons.forEach(button => {
 		let roundOutcome = playRound(playerSelection, roundNumber);
 		updateScores(roundOutcome);
 		document.querySelector(".round-number .counter").textContent = roundNumber++;
-		if (playerScore >= 5) {
-			alert("You win! \nPlay again?");
-			updateScores("reset")
-		} else if (computerScore >= 5) {
-			alert("You lose :( \nPlay again?")
-			updateScores("reset")
-		}
+		checkIfFive(playerScore, computerScore);
 	})
 });
 
-function removeTransition(e) {
-	if (e.propertyName !== "scale") return;
-	this.classList.remove("clicked");
+function checkIfFive(playerScore, computerScore) {
+	if (playerScore >= 5) {
+		let winner = "player";
+		endGame(winner);
+	} else if (computerScore >= 5) {
+		let winner = "computer";
+		endGame(winner);
+	} else return
 }
 
-function resetGame() {
-	playerScore = 0;
-	document.querySelector(".player .score").textContent = playerScore;
-	computerScore = 0;
-	document.querySelector(".computer .score").textContent = computerScore;
-	roundNumber = 1;
-	document.querySelector(".round-number .counter").textContent = roundNumber - 1;
-	document.querySelector(".player .selects").textContent = "__";
-    document.querySelector(".computer .selects").textContent = "__";
+function endGame(winner) {
+	document.querySelector(".game").classList.add("invisible");
+	document.querySelector(".game-over-container").classList.remove("invisible");
+	if (winner === "player") {
+		document.querySelector(".winner").textContent = `Congrats, you won!`
+	} else {
+		document.querySelector(".winner").textContent = `Tough luck, you lost!`
+	}
 }
+
+resetButton.addEventListener("click", resetGame);

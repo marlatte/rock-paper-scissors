@@ -6,33 +6,43 @@ body {
 	letter-spacing: 1px;
 	margin: 0;
 	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .banner {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	height: 100px;
-	margin-bottom: 50px;
+	height: 75px;
 }
 
 .game {
 	display: flex;
 	flex-direction: column;
 	align-items:center;
-	gap: 50px;
 }
 
+	.round-number{
+		font-size: 20px;
+	}
+	
+		.round-number .counter {
+			color: white;
+			font-size: 25px;
+			text-shadow: 0px 0px 15px white;
+		}
 
 	.results {
 		display: flex;
 		flex-direction: column;
 		gap: 30px;
-		margin: 10px;
+		margin: 20px 0 40px;
 		width: 400px;
 	}
 		
-		h2 {
+		h3 {
 			font-size: 20px;
 			margin: 0 0 10px 0;
 		}
@@ -61,6 +71,7 @@ body {
 			display: flex;
 			justify-content: space-evenly;
 			padding: 20px;
+			font-size: 20px;
 		}
 
 			.scoreboard .text {
@@ -69,12 +80,16 @@ body {
 				align-items: center;
 			}
 
+			.scoreboard .score {
+				text-shadow: 0px 0px 15px white;
+			}
+
 	.buttons {
 		display: flex;
 		gap: 15px;
 	}
 
-		button {
+		.game button {
 			background-size: 75%;
 			background-repeat: no-repeat;
 			background-color: black;
@@ -115,4 +130,24 @@ body {
 			box-shadow: 0px 0px 15px 0px yellow;
 			scale: 1.02;
 			color: yellow;
+		}
+
+		.invisible {
+			display: none;
+		}
+
+		.game-over-items {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			gap: 20px;
+			height: 50vh;
+			border: 2px solid #13e907;
+			margin-top: 100px;
+			width: 50vw;
+		}
+
+		.winner {
+			font-size: 20px;
 		}
