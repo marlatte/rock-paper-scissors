@@ -78,17 +78,6 @@ function playRound(playerSelection, roundNumber) {
     };
 }
 
-function whoWon(roundOutcome) {
-    if (roundOutcome === "win") {
-        roundWinner = "Player";
-    } else if (roundOutcome === "lose") {
-        roundWinner = "Computer";
-    } else {
-        roundWinner = "no one";
-    }
-    return roundWinner;
-}
-
 function printScores(playerScore, computerScore, roundNumber) {
     console.log(`(${roundNumber}) Player Score: ${playerScore}`)
     console.log(`(${roundNumber}) Computer Score: ${computerScore}`)
@@ -142,12 +131,17 @@ function printScores(playerScore, computerScore, roundNumber) {
 // }
 
 function updateScores(roundOutcome) {
-	if (roundOutcome === "win") {
+	if (roundOutcome === "tie") {
+		return
+	}
+	else if (roundOutcome === "win") {
 		document.querySelector(".player .score").textContent = ++playerScore;
 		return playerScore;
 	} else if (roundOutcome === "lose") {
 		document.querySelector(".computer .score").textContent = ++computerScore;
 		return computerScore;
+	} else {
+		resetGame();
 	}
 }
 
@@ -172,8 +166,12 @@ buttons.forEach(button => {
 		let roundOutcome = playRound(playerSelection, roundNumber);
 		updateScores(roundOutcome);
 		document.querySelector(".round-number .counter").textContent = roundNumber++;
-		if (playerScore === 5 || computerScore === 5) {
-			alert("Game Over");
+		if (playerScore >= 5) {
+			alert("You win! \nPlay again?");
+			updateScores("reset")
+		} else if (computerScore >= 5) {
+			alert("You lose :( \nPlay again?")
+			updateScores("reset")
 		}
 	})
 });
@@ -183,3 +181,13 @@ function removeTransition(e) {
 	this.classList.remove("clicked");
 }
 
+function resetGame() {
+	playerScore = 0;
+	document.querySelector(".player .score").textContent = playerScore;
+	computerScore = 0;
+	document.querySelector(".computer .score").textContent = computerScore;
+	roundNumber = 1;
+	document.querySelector(".round-number .counter").textContent = roundNumber - 1;
+	document.querySelector(".player .selects").textContent = "__";
+    document.querySelector(".computer .selects").textContent = "__";
+}
