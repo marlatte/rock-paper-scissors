@@ -1,85 +1,9 @@
-/*      PLANNING TIME
-To play RPS, the computer needs to generate an answer.
-Paper beats Rock
-Rock beats Scissors
-Scissors beats Paper
-
-If I write  it from the user's POV, instead  of  checking  every possible combination, it starts by checking playerSelection first, then compares with computerSelection.
-
-The basic set of functions for 1 round:
-    playRound()
-        getComputerChoice()
-        getPlayerChoice()
-        if (playerSelection === computerSelection)
-            return "It's a tie. Try Again."
-        else
-            checkWin()
-                if (playerSelection === "Rock")
-                    didRockWin()
-                        let rockWin = computerSelection === "Scissors" ? true : false;
-                else if (playerSelection === "Paper")
-                    didPaperWin()
-                        let paperWin = computerSelection === "Rock" ? true : false;
-                else if (playerSelection === "Scissors")
-                    didScissorsWin()
-                        let scissorsWin = computerSelection === "Paper" ? true : false;
-        checkOutcome()
-            let roundOutcome = (playerWin ? "win" : "lose");
-            let winningHand = (playerWin ? playerSelection: computerSelection);
-            let losingHand = (playerWin ? computerSelection : playerSelection);
-        printOutcome()
-            `You ${roundOutcome}! ${winningHand} beats ${losingHand}.`
-
-
-
-To create a 5-round game, I'll need  a for loop with i < 5.
-Save the roundOutcome for each in a variable. Maybe `Round ${i + 1} goes to ${roundWinner}`
-    roundWinner will be dependent on roundOutcome
-        let roundWinner = whoWon()
-            return roundOutcome === "win" ? "User" : "Computer";
-
-Use counter variables for player/computer that goes up by one when they win. After 5 games (or one side reaches 3 wins), the score that's higher is the gameWinner.
-So playerScore/computerScore will be dependent on roundWinner. Then gameWinner will result from an if statement about the counters.
-
-Variables: playerScore, computerScore, gameWinner, roundWinner,
-
-game()
-    let playerScore = 0;
-    let computerScore = 0;
-    for i < 5 {
-        playRound()
-            return roundOutcome
-        let roundWinner = whoWon(roundOutcome)
-            if (roundOutcome === "win") {
-                roundWinner = "Player"
-            } else if (roundOutcome === lose) {
-                roundWinner = "Computer"
-            } else {
-                roundWinner = "no one"
-            }
-        console.log(`Round ${i + 1} goes to ${roundWinner}!`)
-        if (roundWinner === "Player") {
-            playerScore++
-        } else if (roundWinner === "Computer") {
-            computerScore++
-        }
-        printScores()
-            console.log(`Player Score: ${playerScore}`)
-            console.log(`Computer Score: ${computerScore}`)
-        if (playerScore or computerScore >= 3)  {
-            i = 5;
-        }
-    }
-    if (playerScore > computerScore) {
-        You win
-    } else {
-        You lose
-    }
-*/
-
-
 const buttons = document.querySelectorAll("button");
 let scoreboard = document.querySelector(".scoreboard");
+let roundNumber = 1;
+let playerScore = +document.querySelector(".player .score").textContent;
+let computerScore = +document.querySelector(".computer .score").textContent;
+
 
 
 function generateRandomInts(lowerLimit, upperLimit, amount = 1) {
@@ -96,8 +20,8 @@ function getComputerChoice() {
 }
 
 function printSelections(playerSelection, computerSelection) {
-	document.querySelector(".player-selects").textContent = `Player selects: ${playerSelection}`;
-    document.querySelector(".computer-selects").textContent = `Computer selects: ${computerSelection}`;
+	document.querySelector(".player .selects").textContent = playerSelection;
+    document.querySelector(".computer .selects").textContent = computerSelection;
 }
 
 function checkWin(playerSelection, computerSelection) {
@@ -134,13 +58,13 @@ function checkOutcome(playerWin, playerSelection, computerSelection) {
     return [roundOutcome, winningHand, losingHand]
 }
 
-function playRound(playerSelection) {
+function playRound(playerSelection, roundNumber) {
     let computerSelection = getComputerChoice();
     let tieGame = (playerSelection === computerSelection);
 	if (tieGame) {
         printSelections(playerSelection, computerSelection);
         roundOutcome = "tie"
-		document.querySelector(".round-outcome").textContent = `It's a tie.`;
+		document.querySelector(".round-outcome").textContent = `Round ${roundNumber}: It's a tie.`;
         return roundOutcome;
     } else {
         printSelections(playerSelection, computerSelection);
@@ -149,7 +73,7 @@ function playRound(playerSelection) {
         let roundOutcome = resultArray[0];
         let winningHand = resultArray[1];
         let losingHand  = resultArray[2];
-        document.querySelector(".round-outcome").textContent = `You ${roundOutcome}! ${winningHand} beats ${losingHand}.`;
+        document.querySelector(".round-outcome").textContent = `Round ${roundNumber}: You ${roundOutcome}! ${winningHand} beats ${losingHand}.`;
         return roundOutcome;
     };
 }
@@ -171,8 +95,7 @@ function printScores(playerScore, computerScore, roundNumber) {
  }
 
 //  function game(gameLength = 5) {
-//     let playerScore = 0;
-//     let computerScore = 0;
+
 //     let mercyRule = gameLength/2;
 //     let roundNumber;
 //     let roundOutcome;
@@ -218,6 +141,15 @@ function printScores(playerScore, computerScore, roundNumber) {
 //     }
 // }
 
+function updateScores(roundOutcome) {
+	if (roundOutcome === "win") {
+		document.querySelector(".player .score").textContent = ++playerScore;
+		return playerScore;
+	} else if (roundOutcome === "lose") {
+		document.querySelector(".computer .score").textContent = ++computerScore;
+		return computerScore;
+	}
+}
 
 buttons.forEach(button => {
 	button.addEventListener("click", (e) => {
@@ -235,6 +167,11 @@ buttons.forEach(button => {
                 playerSelection = "Scissors";
                 break;
 		}
-		playRound(playerSelection);
+		let roundOutcome = playRound(playerSelection, roundNumber);
+		updateScores(roundOutcome);
+		document.querySelector(".round-number .counter").textContent = ++roundNumber;
+		if (playerScore === 5 || computerScore === 5) {
+			alert("Game Over");
+		}
 	})
 });

@@ -3,25 +3,77 @@
 } */
 
 body {
-	display: flex;
-	flex-direction: column;
-	align-items:center;
 	background-color: black;
 	color: #13e907;
 	font-family: 'Courier New', Courier, monospace;
+	margin: 0;
+	box-sizing: border-box;
 }
 
-button {
-	padding: 5px;
-	margin: 10px;
-}
-
-.scoreboard {
-	border: 2px solid #13e907;
+.banner {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	height: 100px;
-	width: 100px;
 }
 
-.current-round {
-	color: aqua;
+.game {
+	display: flex;
+	flex-direction: column;
+	align-items:center;
+	justify-content: center;
 }
+
+	.round-number {
+		align-self: flex-start;
+		margin: 50px;
+	}
+
+	.results {
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
+		margin: 10px;
+		width: 400px;
+	}
+
+		.current-round {
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+		}
+		
+			.player {
+				color: aqua;
+			}
+
+			.computer{
+				color: yellow;
+			}
+
+			.round-outcome {
+				padding-top: 10px;
+			}
+
+		.scoreboard {
+			border: 2px solid #13e907;
+			display: flex;
+			justify-content: space-evenly;
+			padding: 20px;
+		}
+
+			.scoreboard .text {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+	buttons {
+		display: flex;
+	}
+
+		button {
+			padding: 5px;
+			margin: 10px;
+			border-radius: 5px;
+		}

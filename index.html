@@ -8,20 +8,34 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Rock Paper Scissors Game</h1>
-	<div class="results">
-		<div class="scoreboard">
-			<div id="player-score"></div>
-			<div id="computer-score"></div>
-		</div>
-		<div class="current-round player-selects">Test</div>
-		<div class="current-round computer-selects">Test</div>
-		<div class="current-round round-outcome">TEST</div>
+	<div class="banner">
+		<h1>Rock Paper Scissors Game</h1>
 	</div>
-
-	<button id="rock">Rock</button>
-	<button id="paper">Paper</button>
-	<button id="scissors">Scissors</button>
+	<div class="game">
+		<div class="round-number">Round Number: <span class="counter">1</span></div>
+		<div class="results">
+			<div class="current-round">
+				<div class="player">Player selects: <span class="selects"></span></div>
+				<div class="computer">Computer selects: <span class="selects"></span></div>
+				<div class="round-outcome">Outcome</div>
+			</div>
+			<div class="scoreboard">
+				<div class="player text">
+					<span class="score">0</span>
+					Player
+				</div>
+				<div class="computer text">
+					<span class="score">0</span>
+					Computer
+				</div>
+			</div>
+		</div>
+		<div class="buttons">
+			<button id="rock">Rock</button>
+			<button id="paper">Paper</button>
+			<button id="scissors">Scissors</button>
+		</div>
+	</div>
 
     <script src="rock-paper-scissors.js"></script>
 </body>
