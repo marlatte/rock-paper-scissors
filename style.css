@@ -12,22 +12,19 @@ body {
 
 .banner {
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
 	align-items: center;
 	height: 100px;
+	margin-bottom: 50px;
 }
 
 .game {
 	display: flex;
 	flex-direction: column;
 	align-items:center;
-	justify-content: center;
+	gap: 50px;
 }
 
-	.round-number {
-		align-self: flex-start;
-		margin: 50px;
-	}
 
 	.results {
 		display: flex;
@@ -36,24 +33,30 @@ body {
 		margin: 10px;
 		width: 400px;
 	}
-
-		.current-round {
-			display: flex;
-			flex-direction: column;
-			gap: 10px;
+		
+		h2 {
+			font-size: 20px;
+			margin: 0 0 10px 0;
 		}
 		
-			.player {
-				color: aqua;
+		.changeable {
+				display: flex;
+				flex-direction: column;
+				gap: 10px;
+				padding-left: 60px;
 			}
+		
+				.player {
+					color: aqua;
+				}
 
-			.computer{
-				color: yellow;
-			}
+				.computer{
+					color: yellow;
+				}
 
-			.round-outcome {
-				padding-top: 10px;
-			}
+				.round-outcome {
+					padding-top: 10px;
+				}
 
 		.scoreboard {
 			border: 2px solid #13e907;
@@ -70,6 +73,7 @@ body {
 
 	.buttons {
 		display: flex;
+		gap: 15px;
 	}
 
 		button {
@@ -77,26 +81,31 @@ body {
 			background-repeat: no-repeat;
 			background-color: black;
 			background-position: center;			
-			padding: 5px;
+			padding-bottom: 25px;
 			margin: 10px;
-			border-radius: 5px;
+			border-radius: 105px;
 			display: flex;
 			align-items: flex-end;
 			justify-content: center;
-			color: #13e907;
+			color: white;
 			width: 200px;
-			height: 310px;
+			height: 330px;
 			border: none;
     		box-shadow: inset 0px 0px 20px 0px #13e907;
 			transition: 0.07s;
+			font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+			font-weight: bold;
+			font-size: large;
 		}
 
 		#rock {
 			background-image: url(./images/rps-hands-rock.png);
+			background-position-y: 111px;
 		}
 
 		#paper {
 			background-image: url(./images/rps-hands-paper.png);
+			background-position-y: 48px;
 		}
 
 		#scissors {
@@ -106,4 +115,5 @@ body {
 		.clicked {
 			box-shadow: 0px 0px 15px 0px yellow;
 			scale: 1.02;
+			color: yellow;
 		}

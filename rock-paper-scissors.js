@@ -64,7 +64,7 @@ function playRound(playerSelection, roundNumber) {
 	if (tieGame) {
         printSelections(playerSelection, computerSelection);
         roundOutcome = "tie"
-		document.querySelector(".round-outcome").textContent = `Round ${roundNumber}: It's a tie.`;
+		document.querySelector(".round-outcome").textContent = `It's a tie.`;
         return roundOutcome;
     } else {
         printSelections(playerSelection, computerSelection);
@@ -73,7 +73,7 @@ function playRound(playerSelection, roundNumber) {
         let roundOutcome = resultArray[0];
         let winningHand = resultArray[1];
         let losingHand  = resultArray[2];
-        document.querySelector(".round-outcome").textContent = `Round ${roundNumber}: You ${roundOutcome}! ${winningHand} beats ${losingHand}.`;
+        document.querySelector(".round-outcome").textContent = `You ${roundOutcome}! ${winningHand} beats ${losingHand}.`;
         return roundOutcome;
     };
 }
@@ -171,7 +171,7 @@ buttons.forEach(button => {
 		}
 		let roundOutcome = playRound(playerSelection, roundNumber);
 		updateScores(roundOutcome);
-		document.querySelector(".round-number .counter").textContent = ++roundNumber;
+		document.querySelector(".round-number .counter").textContent = roundNumber++;
 		if (playerScore === 5 || computerScore === 5) {
 			alert("Game Over");
 		}
