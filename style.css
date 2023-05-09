@@ -68,12 +68,42 @@ body {
 				align-items: center;
 			}
 
-	buttons {
+	.buttons {
 		display: flex;
 	}
 
 		button {
+			background-size: 75%;
+			background-repeat: no-repeat;
+			background-color: black;
+			background-position: center;			
 			padding: 5px;
 			margin: 10px;
 			border-radius: 5px;
+			display: flex;
+			align-items: flex-end;
+			justify-content: center;
+			color: #13e907;
+			width: 200px;
+			height: 310px;
+			border: none;
+    		box-shadow: inset 0px 0px 20px 0px #13e907;
+			transition: 0.07s;
+		}
+
+		#rock {
+			background-image: url(./images/rps-hands-rock.png);
+		}
+
+		#paper {
+			background-image: url(./images/rps-hands-paper.png);
+		}
+
+		#scissors {
+			background-image: url(./images/rps-hands-scissors.png);
+		}
+
+		.clicked {
+			box-shadow: 0px 0px 15px 0px yellow;
+			scale: 1.02;
 		}

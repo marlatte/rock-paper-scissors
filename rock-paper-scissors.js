@@ -154,6 +154,8 @@ function updateScores(roundOutcome) {
 buttons.forEach(button => {
 	button.addEventListener("click", (e) => {
 		let playerSelection = e.target.id;
+		document.querySelector(`#${playerSelection}`).classList.add("clicked");
+		button.addEventListener("transitionend", removeTransition);
 		switch (playerSelection) {
 			case "rock":
                 playerSelection = "Rock";
@@ -175,3 +177,9 @@ buttons.forEach(button => {
 		}
 	})
 });
+
+function removeTransition(e) {
+	if (e.propertyName !== "scale") return;
+	this.classList.remove("clicked");
+}
+
