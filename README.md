@@ -5,7 +5,7 @@ My first JS game to add to my portfolio. Initial version will be played in the c
 
 First version is in the `original-rps.js` file.
 
-> Hand graphics modified from https://www.vectorstock.com/royalty-free-vector/rock-paper-scissors-hand-gesture-vector-25169733.
+> Hand graphics modified from [VectorStock](https://www.vectorstock.com/royalty-free-vector/rock-paper-scissors-hand-gesture-vector-25169733).
 
 
 ## Future updates:
