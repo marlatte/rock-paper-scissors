@@ -7,6 +7,7 @@ First version is in the `original-rps.js` file.
 
 > Hand graphics modified from [VectorStock](https://www.vectorstock.com/royalty-free-vector/rock-paper-scissors-hand-gesture-vector-25169733).
 
+👉 [Live Demo](https://marlatte.github.io/rock-paper-scissors/) 👈
 
 ## Future updates:
 
@@ -15,3 +16,4 @@ First version is in the `original-rps.js` file.
 - [ ] How to make text appear like it's being typed (i.e. letter by letter)?
 - [ ] Restyle the restart button
 - [ ] Mobile friendly
+- [ ] Clean up images/
