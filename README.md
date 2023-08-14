@@ -20,7 +20,9 @@ First version is in the `original-rps.js` file.
 
 
 ### Icons:
-
+- Rock: `<i class="fa-regular fa-hand-back-fist"></i>`
+- Paper: `<i class="fa-regular fa-hand"></i>`
+- Scissors: `<i class="fa-regular fa-hand-scissors"></i>`
 
 ### Inspiration
 - [Simple UI](https://flutterawesome.com/content/images/2022/07/Code-2022-11-58-50.jpg)
