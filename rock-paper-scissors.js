@@ -112,7 +112,7 @@ function resetGame() {
 	document.querySelector(".player .selects").textContent = "__";
     document.querySelector(".computer .selects").textContent = "__";
 	document.querySelector(".round-outcome").textContent = "Outcome"
-	document.querySelector(".game").classList.remove("invisible");
+	document.querySelector(".game").classList.remove("invisible"); // replace "invisible" with "hidden", try to use .toggle() instead too.
 	document.querySelector(".game-over-container").classList.add("invisible");
 }
 

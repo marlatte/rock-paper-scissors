@@ -1,153 +1,182 @@
+* {
+	box-sizing: border-box;
+}
+
+:root {
+	--neon-sky-blue: #4deeea;
+	--neon-green: #13e907;
+	--neon-yellow: #ffe700;
+	--neon-pink: #f000ff;
+	--neon-blue: #0e1dff;
+
+	--main-fonts: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS';
+	--backup-fonts: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
 body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
 	background-color: black;
-	color: #13e907;
-	font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	color: var(--neon-green);
+	font-family: var(--main-fonts), var(--backup-fonts);
 	font-weight: bold;
 	letter-spacing: 1px;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.round-number {
 	margin: 0;
-	box-sizing: border-box;
+	font-size: 20px;
+}
+
+.round-number .counter {
+	color: white;
+}
+
+.results {
+	margin: 20px 0 40px;
+	width: 400px;
+
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+}
+
+h3 {
+	font-size: 20px;
+	margin: 0 0 10px 0;
+}
+
+.changeable {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding-left: 60px;
+}
+
+.player {
+	color: var(--neon-sky-blue);
+}
+
+.computer {
+	color: yellow;
+}
+
+.round-outcome {
+	padding-top: 10px;
+}
+
+.scoreboard {
+	border: 2px solid var(--neon-green);
+	display: flex;
+	justify-content: space-evenly;
+	padding: 20px;
+	font-size: 20px;
+}
+
+.scoreboard .text {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
-.banner {
+.buttons {
+	display: flex;
+	gap: 15px;
+}
+
+main button {
+	background-size: 75%;
+	background-repeat: no-repeat;
+	background-color: black;
+	background-position: center;
+	padding-bottom: 25px;
+	margin: 10px;
+	border-radius: 105px;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	color: white;
+	width: 200px;
+	height: 330px;
+	border: none;
+	box-shadow: inset 0px 0px 20px 0px var(--neon-green);
+	transition: 0.07s;
+	font-family: unset;
+	font-weight: unset;
+	letter-spacing: unset;
+	font-size: large;
+}
+
+main .rock {
+	background-image: url(./images/rps-hands-rock.png);
+	background-position-y: 66%;
+}
+
+main .paper {
+	background-image: url(./images/rps-hands-paper.png);
+	background-position-y: 45%;
+}
+
+main .scissors {
+	background-image: url(./images/rps-hands-scissors.png);
+}
+
+.clicked {
+	box-shadow: 0px 0px 15px 0px yellow;
+	scale: 1.02;
+	color: yellow;
+}
+
+.hidden {
+	display: none;
+}
+
+.game-over-items {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	align-items: center;
-	height: 75px;
+	gap: 20px;
+	height: 50vh;
+	border: 2px solid var(--neon-green);
+	margin-top: 100px;
+	width: 50vw;
 }
 
-.game {
+.winner {
+	font-size: 20px;
+}
+
+footer {
 	display: flex;
-	flex-direction: column;
-	align-items:center;
+	align-items: center;
+	gap: 10px;
+	margin: auto 0 8px;
+	text-align: center;
 }
 
-	.round-number{
-		font-size: 20px;
-	}
-	
-		.round-number .counter {
-			color: white;
-			font-size: 25px;
-			text-shadow: 0px 0px 15px white;
-		}
+#my-name {
+	font-weight: bold;
+}
 
-	.results {
-		display: flex;
-		flex-direction: column;
-		gap: 30px;
-		margin: 20px 0 40px;
-		width: 400px;
-	}
-		
-		h3 {
-			font-size: 20px;
-			margin: 0 0 10px 0;
-		}
-		
-		.changeable {
-				display: flex;
-				flex-direction: column;
-				gap: 10px;
-				padding-left: 60px;
-			}
-		
-				.player {
-					color: aqua;
-				}
+a {
+	text-decoration: none;
+}
 
-				.computer{
-					color: yellow;
-				}
+.fa-github {
+	color: white;
+}
 
-				.round-outcome {
-					padding-top: 10px;
-				}
-
-		.scoreboard {
-			border: 2px solid #13e907;
-			display: flex;
-			justify-content: space-evenly;
-			padding: 20px;
-			font-size: 20px;
-		}
-
-			.scoreboard .text {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-			}
-
-			.scoreboard .score {
-				text-shadow: 0px 0px 15px white;
-			}
-
-	.buttons {
-		display: flex;
-		gap: 15px;
-	}
-
-		.game button {
-			background-size: 75%;
-			background-repeat: no-repeat;
-			background-color: black;
-			background-position: center;			
-			padding-bottom: 25px;
-			margin: 10px;
-			border-radius: 105px;
-			display: flex;
-			align-items: flex-end;
-			justify-content: center;
-			color: white;
-			width: 200px;
-			height: 330px;
-			border: none;
-    		box-shadow: inset 0px 0px 20px 0px #13e907;
-			transition: 0.07s;
-			font-family: unset;
-			font-weight: unset;
-			letter-spacing: unset;
-			font-size: large;
-		}
-
-		#rock {
-			background-image: url(./images/rps-hands-rock.png);
-			background-position-y: 111px;
-		}
-
-		#paper {
-			background-image: url(./images/rps-hands-paper.png);
-			background-position-y: 48px;
-		}
-
-		#scissors {
-			background-image: url(./images/rps-hands-scissors.png);
-		}
-
-		.clicked {
-			box-shadow: 0px 0px 15px 0px yellow;
-			scale: 1.02;
-			color: yellow;
-		}
-
-		.invisible {
-			display: none;
-		}
-
-		.game-over-items {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			gap: 20px;
-			height: 50vh;
-			border: 2px solid #13e907;
-			margin-top: 100px;
-			width: 50vw;
-		}
-
-		.winner {
-			font-size: 20px;
-		}
+.fa-github:hover {
+	color: white;
+	transition: transform 0.4s ease-in-out;
+	transform: rotate(-360deg) scale(1.3);
+}

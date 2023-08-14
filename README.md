@@ -17,3 +17,14 @@ First version is in the `original-rps.js` file.
 - [ ] Restyle the restart button
 - [ ] Mobile friendly
 - [ ] Clean up images/
+
+
+### Icons:
+
+
+### Inspiration
+- [Simple UI](https://flutterawesome.com/content/images/2022/07/Code-2022-11-58-50.jpg)
+- [Buttons on bottom, progress bars on right](https://cdn.freebiesupply.com/images/large/1x/mobile-game-ui-kit-epic-rps-h62.jpg)
+- [Round outcome center](https://businesscloud.co.uk/wp-content/uploads/2021/01/iPiccy-img-600x375.jpg)
+- [Score up top?](https://img.y8.com/cloud/y8-thumbs/55340/big.gif)
+- None of these _say_ "Rock Paper Scissors" on screen. Maybe for the mobile view, have that be a "welcome" modal that disappears, and for wider screens it can appear in the top left.
