@@ -65,6 +65,10 @@ h1 {
 	font-size: 32px;
 }
 
+.fa-hand-scissors {
+	transform: rotate(90deg) scaleY(-1);
+}
+
 /* -------------------- /Utilities & Universals -------------------- */
 
 /* -------------------- Content -------------------- */
@@ -172,16 +176,37 @@ a {
 .playground {
 	flex: 1;
 
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-rows: 1fr 70px 1fr;
 }
 
-/* -------------------- Upper -------------------- */
+/* -------------------- Computer Choice -------------------- */
 
-.upper {
-	flex: 1;
-	margin-top: 165px;
+.top {
+	display: grid;
+	place-content: center;
+}
 
+.comp-choice {
+	--comp-choice-dimensions: min(50vw, 200px);
+
+	width: var(--comp-choice-dimensions);
+	height: var(--comp-choice-dimensions);
+
+	display: grid;
+	place-content: center;
+
+	font-size: calc(0.7 * var(--comp-choice-dimensions));
+	border-radius: 20px;
+	border: 2px solid var(--comp-color);
+	color: var(--comp-color);
+}
+
+/* -------------------- /Computer Choice -------------------- */
+
+/* -------------------- Middle -------------------- */
+
+.middle {
 	display: flex;
 	align-items: center;
 }
@@ -191,7 +216,10 @@ a {
 	color: yellow;
 	text-align: center;
 	text-transform: uppercase;
-	font-size: max(calc(100vw / 14), 30px);
+}
+
+#message {
+	font-size: min(calc(100vw / 9), 60px);
 }
 
 .scoreboard {
@@ -239,13 +267,14 @@ progress[value]#user-progress::-webkit-progress-value {
 	background-color: var(--text-primary);
 }
 
-/* -------------------- /Upper -------------------- */
+/* -------------------- /Middle -------------------- */
 
 /* -------------------- Lower -------------------- */
 
 .lower {
 	display: flex;
 	flex-direction: column;
+	justify-content: end;
 	align-items: center;
 }
 
@@ -285,7 +314,6 @@ button#paper {
 
 button#scissors {
 	grid-area: scissors;
-	transform: rotate(90deg) scaleY(-1);
 }
 
 button:hover {
@@ -346,10 +374,6 @@ button.chosen {
 
 	h3 {
 		font-size: min(calc(100vw / 20), 50px);
-	}
-
-	.upper {
-		margin-top: 100px;
 	}
 
 	progress[value] {
