@@ -45,7 +45,7 @@ button {
 
 body {
 	min-height: 100vh;
-	overflow-x: hidden;
+	overflow: hidden;
 
 	display: flex;
 	flex-direction: column;
@@ -56,7 +56,19 @@ body {
 }
 
 .hidden {
-	display: none;
+	display: none !important;
+}
+
+h1 {
+	font-size: 32px;
+}
+
+h2 {
+	font-size: min(calc(100vw / 14), 30px);
+}
+
+h3 {
+	font-size: 16px;
 }
 
 /* -------------------- /Utilities & Universals -------------------- */
@@ -78,6 +90,7 @@ main {
 	display: flex;
 	flex-direction: column;
 }
+
 /* -------------------- Welcome -------------------- */
 
 
@@ -93,8 +106,11 @@ main {
 	flex-direction: column;
 }
 
+/* -------------------- Upper -------------------- */
+
 .upper {
 	flex: 1;
+	margin-top: 100px;
 
 	display: flex;
 	align-items: center;
@@ -102,10 +118,11 @@ main {
 
 .message {
 	flex: 1;
+	color: yellow;
 	text-align: center;
+	text-transform: uppercase;
+	font-size: max(calc(100vw / 14), 30px);
 }
-
-/* -------------------- Scoreboard -------------------- */
 
 .scoreboard {
 	--prog-visual-width: 3vw;
@@ -114,12 +131,12 @@ main {
 	margin: 0 -18vh 0 -22vh;
 	transform: rotate(90deg);
 
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    
+	display: flex;
+	align-items: center;
+	gap: 5px;
+
 	border-radius: var(--prog-visual-width);
-    background-color: white;
+	background-color: white;
 }
 
 progress[value] {
@@ -152,24 +169,94 @@ progress[value]#user-progress::-webkit-progress-value {
 	background-color: var(--neon-green);
 }
 
-/* -------------------- /Scoreboard -------------------- */
+/* -------------------- /Upper -------------------- */
 
-/* -------------------- Buttons -------------------- */
+/* -------------------- Lower -------------------- */
+
+.lower {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
 
 .buttons {
+	--button-dimensions: min(90px, 25vw);
+
+	margin-bottom: -20px;
+
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-areas:
+		".... paper ........"
+		"rock paper scissors"
+		"rock ..... scissors";
+	column-gap: calc(0.24 * var(--button-dimensions));
 }
 
 button {
-	padding: 10px;
+	width: var(--button-dimensions);
+	height: var(--button-dimensions);
 
 	background-color: var(--neon-sky-blue);
 	color: #000;
-	border-radius: 50px;
+	border-radius: var(--button-dimensions);
 }
 
-/* -------------------- /Buttons -------------------- */
+button i {
+	font-size: calc(0.7 * var(--button-dimensions));
+}
+
+button#rock {
+	grid-area: rock;
+}
+
+button#paper {
+	grid-area: paper;
+}
+
+button#scissors {
+	grid-area: scissors;
+	transform: rotate(90deg) scaleY(-1);
+}
+
+button:hover {
+	background-color: unset;
+	border: 2px solid greenyellow;
+	color: greenyellow;
+}
+
+button:active {
+	background-color: unset;
+	border: 2px solid var(--neon-green);
+	color: var(--neon-green);
+}
+
+button.chosen {
+	background-color: unset;
+	border: 2px solid var(--neon-green);
+	color: var(--neon-green);
+}
+
+.round-number {
+	--round-number-dimensions: 120px;
+
+	width: var(--round-number-dimensions);
+	height: var(--round-number-dimensions);
+	margin-bottom: calc(-0.5 * var(--round-number-dimensions));
+
+	display: grid;
+	place-content: center;
+
+	background-color: #000;
+	box-shadow: inset 0 0 calc(0.2 * var(--round-number-dimensions)) 1px var(--neon-sky-blue);
+	border-radius: var(--round-number-dimensions);
+}
+
+.round-number h3 {
+	margin-bottom: calc(0.3 * var(--round-number-dimensions));
+	font-size: calc(0.22 * var(--round-number-dimensions));
+}
+
+/* -------------------- /Lower -------------------- */
 /* -------------------- /Playground -------------------- */
 
 /* -------------------- Game Over -------------------- */

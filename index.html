@@ -33,16 +33,27 @@
 			<h3>?</h3>
 		</section>
 		<section class="playground">
-			<div class="upper">
-				<h2 class="message">Victory</h2>
+			<article class="upper">
+				<h2 class="message">fight</h2>
 				<div class="scoreboard">
-					<progress id="computer-progress" max="5" value="1">10</progress>
-					<progress id="user-progress" max="5" value="3">50</progress>
+					<progress id="computer-progress"
+							  max="5"
+							  value="1">10</progress>
+					<progress id="user-progress"
+							  max="5"
+							  value="3">50</progress>
 				</div>
-			</div>
-			<div class="buttons">
-				<button>Rock</button><button>Paper</button><button>Scissors</button>
-			</div>
+			</article>
+			<article class="lower">
+				<div class="buttons">
+					<button id="rock"><i class="fa-regular fa-hand-back-fist"></i></button>
+					<button id="paper"><i class="fa-regular fa-hand"></i></button>
+					<button id="scissors"><i class="fa-regular fa-hand-scissors"></i></button>
+				</div>
+				<div class="round-number">
+					<h3>2</h3>
+				</div>
+			</article>
 		</section>
 		<section class="game-over modal hidden">
 			<div class="game-over-items">
