@@ -21,20 +21,41 @@
 </head>
 
 <body>
-	<header>
+	<header class="hidden">
 		<h1>Rock Paper Scissors</h1>
 	</header>
 	<main>
-		<section class="welcome modal hidden">
-			<h2>Rock Paper Scissors</h2>
-			<h3>First to Five</h3>
-			<h4>Do you want to...</h4>
-			<button type="button">Play A Game</button>
-			<h3>?</h3>
+		<section class="modal hidden">
+			<div class="welcome headers ">
+				<h2>Rock Paper Scissors</h2>
+				<h3>First to Five</h3>
+			</div>
+			<div class="game-over headers hidden">
+				<h2>Game Over</h2>
+				<h3>You Win!</h3>
+			</div>
+			<div class="start-container">
+				<!-- Set font-size: 22px for "Play Again" -->
+				<button type="button"
+						id="start-game-btn"
+						style="font-size: 28px;">Play</button>
+			</div>
+			<footer>
+				<div class="footer-text">
+					<div id="my-name">&copy; 2023 Walker Marlatt</div>
+					<div>The Odin Project</div>
+				</div>
+				<a href="https://github.com/marlatte"
+				   target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</footer>
 		</section>
-		<section class="playground">
+		<section class="playground ">
 			<article class="upper">
-				<h2 class="message">fight</h2>
+				<div class="message-container">
+					<h2 id="message">message</h2>
+				</div>
 				<div class="scoreboard">
 					<progress id="computer-progress"
 							  max="5"
@@ -55,24 +76,7 @@
 				</div>
 			</article>
 		</section>
-		<section class="game-over modal hidden">
-			<div class="game-over-items">
-				<h2>Game Over</h2>
-				<p class="winner">[Outcome]</p>
-				<button class="play-again">Play Again</button>
-			</div>
-		</section>
 	</main>
-	<footer class="hidden">
-		<div class="footer-text">
-			<div id="my-name">&copy; 2023 Walker Marlatt</div>
-			<div>The Odin Project</div>
-		</div>
-		<a href="https://github.com/marlatte"
-		   target="_blank">
-			<i class="fa fa-github"></i>
-		</a>
-	</footer>
 </body>
 
 </html>
