@@ -45,14 +45,15 @@ button {
 }
 
 body {
-	min-height: 100vh;
+	height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+	height: calc(var(--vh, 1vh) * 100);
 	overflow: hidden;
 
 	display: flex;
 	flex-direction: column;
 
-	background-color: black;
 	background: repeating-conic-gradient(from 11.25deg, black 0deg 22.5deg, var(--bg-rays) 22.5deg 45deg);
+	background-color: black;
 	color: var(--text-primary);
 	font-family: var(--main-font), var(--backup-fonts);
 }
