@@ -51,6 +51,7 @@ body {
 	flex-direction: column;
 
 	background-color: black;
+	background: repeating-conic-gradient(from 11.25deg, black 0deg 22.5deg, hsl(0, 0%, 6%) 22.5deg 45deg);
 	color: var(--neon-green);
 	font-family: var(--main-font), var(--backup-fonts);
 }
