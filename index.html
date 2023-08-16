@@ -33,10 +33,15 @@
 			<h3>?</h3>
 		</section>
 		<section class="playground">
-			<h2 class="message">Victory</h2>
-			<div class="scoreboard">
-				<progress id="computer-progress" max="100" value="10">10</progress>
-				<progress id="user-progress" max="100" value="50">50</progress>
+			<div class="upper">
+				<h2 class="message">Victory</h2>
+				<div class="scoreboard">
+					<progress id="computer-progress" max="5" value="1">10</progress>
+					<progress id="user-progress" max="5" value="3">50</progress>
+				</div>
+			</div>
+			<div class="buttons">
+				<button>Rock</button><button>Paper</button><button>Scissors</button>
 			</div>
 		</section>
 		<section class="game-over modal hidden">
@@ -47,7 +52,7 @@
 			</div>
 		</section>
 	</main>
-	<footer>
+	<footer class="hidden">
 		<div class="footer-text">
 			<div id="my-name">&copy; 2023 Walker Marlatt</div>
 			<div>The Odin Project</div>

@@ -49,7 +49,6 @@ body {
 
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 
 	background-color: black;
 	color: var(--neon-green);
@@ -72,6 +71,13 @@ header {
 /* -------------------- /Header -------------------- */
 
 /* -------------------- Main -------------------- */
+
+main {
+	flex: 1;
+
+	display: flex;
+	flex-direction: column;
+}
 /* -------------------- Welcome -------------------- */
 
 
@@ -79,39 +85,63 @@ header {
 /* -------------------- /Welcome -------------------- */
 
 /* -------------------- Playground -------------------- */
+
+.playground {
+	flex: 1;
+
+	display: flex;
+	flex-direction: column;
+}
+
+.upper {
+	flex: 1;
+
+	display: flex;
+	align-items: center;
+}
+
+.message {
+	flex: 1;
+	text-align: center;
+}
+
 /* -------------------- Scoreboard -------------------- */
 
-progress[value] {
-	position: absolute;
-	right: 5px;
+.scoreboard {
+	--prog-visual-width: 3vw;
+	--prog-bd-radius: calc(var(--prog-visual-width)) 0 0 calc(var(--prog-visual-width));
 
+	margin: 0 -18vh 0 -22vh;
+	transform: rotate(90deg);
+
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    
+	border-radius: var(--prog-visual-width);
+    background-color: white;
+}
+
+progress[value] {
 	-webkit-appearance: none;
 	appearance: none;
 
-	width: 250px;
-	height: 20px;
-}
-
-progress[value]#user-progress {
-	top: 500px;
+	width: 20vh;
+	height: var(--prog-visual-width);
 }
 
 progress[value]::-webkit-progress-bar {
 	background-color: #262626;
-	border-radius: 10px 0 0 10px;
+	border-radius: var(--prog-bd-radius);
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
 }
 
-progress[value]#computer-progress::-webkit-progress-bar {
-	transform: rotate(90deg);
-}
-
 progress[value]#user-progress::-webkit-progress-bar {
-	transform: rotate(-90deg);
+	transform: rotate(180deg);
 }
 
 progress[value]::-webkit-progress-value {
-	border-radius: 10px 0 0 10px;
+	border-radius: var(--prog-bd-radius);
 }
 
 progress[value]#computer-progress::-webkit-progress-value {
@@ -126,7 +156,18 @@ progress[value]#user-progress::-webkit-progress-value {
 
 /* -------------------- Buttons -------------------- */
 
+.buttons {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+}
 
+button {
+	padding: 10px;
+
+	background-color: var(--neon-sky-blue);
+	color: #000;
+	border-radius: 50px;
+}
 
 /* -------------------- /Buttons -------------------- */
 /* -------------------- /Playground -------------------- */
@@ -142,6 +183,7 @@ progress[value]#user-progress::-webkit-progress-value {
 
 footer {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	gap: 10px;
 	margin: auto 0 8px;
@@ -176,5 +218,9 @@ a {
 	header {
 		display: block;
 		margin: 20px;
+	}
+
+	progress[value] {
+		--prog-visual-width: 2vw;
 	}
 }
