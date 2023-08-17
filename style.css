@@ -306,15 +306,15 @@ button i {
 	font-size: calc(0.7 * var(--button-dimensions));
 }
 
-button#rock {
+button#rock-btn {
 	grid-area: rock;
 }
 
-button#paper {
+button#paper-btn {
 	grid-area: paper;
 }
 
-button#scissors {
+button#scissors-btn {
 	grid-area: scissors;
 }
 
@@ -355,10 +355,6 @@ button.chosen {
 	margin-bottom: calc(0.3 * var(--round-number-dimensions));
 	font-size: calc(0.22 * var(--round-number-dimensions));
 	color: unset;
-}
-
-.spacer {
-	background-color: black;
 }
 
 /* -------------------- /Lower -------------------- */

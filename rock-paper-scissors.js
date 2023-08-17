@@ -1,11 +1,29 @@
-const gameButtons = document.querySelectorAll(".game button");
-const resetButton = document.querySelector(".play-again");
-let scoreboard = document.querySelector(".scoreboard");
+// -------------------------------------------------------------------------------- //
+// ---------------------------     Variables    ----------------------------------- //
+// -------------------------------------------------------------------------------- //
+
+
+// -- Behind the Scenes -- //
 let roundNumber = 1;
-let playerScore = +document.querySelector(".player .score").textContent;
-let computerScore = +document.querySelector(".computer .score").textContent;
 
 
+// -- On-Screen Content -- //
+const rockBtn = document.getElementById("rock-btn");
+const paperBtn = document.getElementById("paper-btn");
+const scissorsBtn = document.getElementById("scissors-btn");
+const startGameBtn = document.getElementById("start-game-btn");
+let computerProgress = document.getElementById("computer-progress");
+let userProgress = document.getElementById("user-progress");
+
+// -------------------------------------------------------------------------------- //
+// ----------------------     Functions & Methods    ------------------------------ //
+// -------------------------------------------------------------------------------- //
+
+
+// -- Behind the Scenes -- //
+
+
+// -- On-Screen Content -- //
 
 function generateRandomInts(lowerLimit, upperLimit, amount = 1) {
     for (let index = 0; index < amount; index++) {
@@ -15,7 +33,7 @@ function generateRandomInts(lowerLimit, upperLimit, amount = 1) {
 }
 
 function getComputerChoice() {    
-    const choices = ["Rock", "Paper", "Scissors"];
+    const choices = ["rock", "paper", "scissors"];
     let computerSelection = choices[generateRandomInts(0, 3)];
     return computerSelection;
 }
@@ -27,28 +45,28 @@ function printSelections(playerSelection, computerSelection) {
 
 function checkWin(playerSelection, computerSelection) {
     let playerWin;
-    if (playerSelection === "Rock") {
+    if (playerSelection === "rock") {
         playerWin = didRockWin(computerSelection);
-    } else if (playerSelection === "Paper") {
+    } else if (playerSelection === "paper") {
         playerWin = didPaperWin(computerSelection);
-    } else if (playerSelection === "Scissors") {
+    } else if (playerSelection === "scissors") {
         playerWin = didScissorsWin(computerSelection);
     }
     return playerWin;
 }
 
     function didRockWin(computerSelection) {
-        let rockWin = computerSelection === "Scissors" ? true : false;
+        let rockWin = computerSelection === "scissors" ? true : false;
         return rockWin;
     }
 
     function didPaperWin(computerSelection) {
-        let paperWin = computerSelection === "Rock" ? true : false;
+        let paperWin = computerSelection === "rock" ? true : false;
         return paperWin;
     }
 
     function didScissorsWin(computerSelection) {
-        let scissorsWin = computerSelection === "Paper" ? true : false;
+        let scissorsWin = computerSelection === "paper" ? true : false;
         return  scissorsWin;
     }
 
@@ -121,19 +139,6 @@ gameButtons.forEach(button => {
 		let playerSelection = e.target.id;
 		document.querySelector(`#${playerSelection}`).classList.add("clicked");
 		button.addEventListener("transitionend", removeTransition);
-		switch (playerSelection) {
-			case "rock":
-                playerSelection = "Rock";
-                break;
-    
-            case "paper":
-                playerSelection = "Paper";
-                break;
-
-            case "scissors":
-                playerSelection = "Scissors";
-                break;
-		}
 		let roundOutcome = playRound(playerSelection, roundNumber);
 		updateScores(roundOutcome);
 		document.querySelector(".round-number .counter").textContent = roundNumber++;
@@ -162,3 +167,41 @@ function endGame(winner) {
 }
 
 resetButton.addEventListener("click", resetGame);
+
+// -------------------------------------------------------------------------------- //
+// --------------------     Calls & Event Listeners    ---------------------------- //
+// -------------------------------------------------------------------------------- //
+
+
+// -- Behind the Scenes -- //
+
+
+// -- On-Screen Content -- //
+
+
+
+/*
+PSEUDO
+
+On start:
+	button text is "play",
+	unhide welcome message;
+On button click: 
+	reset player scores,
+	reset round counter, 
+	reset computer choice, 
+	hide modal, 
+	unhide playground;
+Take user input from a button click;
+Check it against a random computer selection;
+Show computer choice;
+Increment players' and round counters;
+Show a result message;
+Once a player's score is 5: 
+	hide playground, 
+	hide welcome, 
+	button text is "play again",
+	unhide game-over, 
+	unhide modal;
+
+*/
