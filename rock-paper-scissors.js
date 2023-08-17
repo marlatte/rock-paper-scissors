@@ -1,10 +1,3 @@
-window.addEventListener('resize', () => {
-	let vh = window.innerHeight * 0.01;
-	document.documentElement.style.setProperty('--vh', `${vh}px`);
-  });
-
-  
-
 const gameButtons = document.querySelectorAll(".game button");
 const resetButton = document.querySelector(".play-again");
 let scoreboard = document.querySelector(".scoreboard");

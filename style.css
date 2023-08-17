@@ -45,9 +45,8 @@ button {
 }
 
 body {
-	height: 100vh; /* Fallback for browsers that do not support Custom Properties */
-	height: calc(var(--vh, 1vh) * 100);
-	overflow: hidden;
+	height: 100vh;
+	overflow-x: hidden;
 
 	display: flex;
 	flex-direction: column;
@@ -354,6 +353,10 @@ button.chosen {
 	margin-bottom: calc(0.3 * var(--round-number-dimensions));
 	font-size: calc(0.22 * var(--round-number-dimensions));
 	color: unset;
+}
+
+.spacer {
+	background-color: black;
 }
 
 /* -------------------- /Lower -------------------- */
