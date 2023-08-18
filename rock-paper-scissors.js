@@ -4,16 +4,25 @@
 
 
 // -- Behind the Scenes -- //
-let roundNumber = 1;
+let roundCounter = 1,
+	userScore = 0,
+	computerScore = 0;
 
 
 // -- On-Screen Content -- //
-const rockBtn = document.getElementById("rock-btn");
-const paperBtn = document.getElementById("paper-btn");
-const scissorsBtn = document.getElementById("scissors-btn");
+const playground = document.querySelector(".playground");
+const gameButtons = document.querySelectorAll(".button");
+const roundDisplay = document.querySelector(".round-display")
+
+const computerProgress = document.getElementById("computer-progress");
+const userProgress = document.getElementById("user-progress");
+const computerChoiceDisplay = document.getElementById("comp-choice");
+const message = document.getElementById("message");
+
+const modal = document.querySelector(".modal");
+const welcomeMsg = document.querySelector(".welcome");
+const gameOverMsg = document.querySelector(".game-over");
 const startGameBtn = document.getElementById("start-game-btn");
-let computerProgress = document.getElementById("computer-progress");
-let userProgress = document.getElementById("user-progress");
 
 // -------------------------------------------------------------------------------- //
 // ----------------------     Functions & Methods    ------------------------------ //
@@ -23,150 +32,10 @@ let userProgress = document.getElementById("user-progress");
 // -- Behind the Scenes -- //
 
 
+
 // -- On-Screen Content -- //
 
-function generateRandomInts(lowerLimit, upperLimit, amount = 1) {
-    for (let index = 0; index < amount; index++) {
-        const result = Math.floor(Math.random() * (upperLimit - lowerLimit)) + lowerLimit;
-        return result;
-    }
-}
 
-function getComputerChoice() {    
-    const choices = ["rock", "paper", "scissors"];
-    let computerSelection = choices[generateRandomInts(0, 3)];
-    return computerSelection;
-}
-
-function printSelections(playerSelection, computerSelection) {
-	document.querySelector(".player .selects").textContent = playerSelection;
-    document.querySelector(".computer .selects").textContent = computerSelection;
-}
-
-function checkWin(playerSelection, computerSelection) {
-    let playerWin;
-    if (playerSelection === "rock") {
-        playerWin = didRockWin(computerSelection);
-    } else if (playerSelection === "paper") {
-        playerWin = didPaperWin(computerSelection);
-    } else if (playerSelection === "scissors") {
-        playerWin = didScissorsWin(computerSelection);
-    }
-    return playerWin;
-}
-
-    function didRockWin(computerSelection) {
-        let rockWin = computerSelection === "scissors" ? true : false;
-        return rockWin;
-    }
-
-    function didPaperWin(computerSelection) {
-        let paperWin = computerSelection === "rock" ? true : false;
-        return paperWin;
-    }
-
-    function didScissorsWin(computerSelection) {
-        let scissorsWin = computerSelection === "paper" ? true : false;
-        return  scissorsWin;
-    }
-
-function checkOutcome(playerWin, playerSelection, computerSelection) {
-    let roundOutcome = (playerWin ? "win" : "lose");
-    let winningHand = (playerWin ? playerSelection: computerSelection);
-    let losingHand = (playerWin ? computerSelection : playerSelection);
-    return [roundOutcome, winningHand, losingHand]
-}
-
-function playRound(playerSelection, roundNumber) {
-    let computerSelection = getComputerChoice();
-    let tieGame = (playerSelection === computerSelection);
-	if (tieGame) {
-        printSelections(playerSelection, computerSelection);
-        roundOutcome = "tie"
-		document.querySelector(".round-outcome").textContent = `It's a tie.`;
-        return roundOutcome;
-    } else {
-        printSelections(playerSelection, computerSelection);
-        let playerWin = checkWin(playerSelection,  computerSelection);
-        let resultArray = checkOutcome(playerWin, playerSelection, computerSelection);
-        let roundOutcome = resultArray[0];
-        let winningHand = resultArray[1];
-        let losingHand  = resultArray[2];
-        document.querySelector(".round-outcome").textContent = `You ${roundOutcome}! ${winningHand} beats ${losingHand}.`;
-        return roundOutcome;
-    };
-}
-
-function printScores(playerScore, computerScore, roundNumber) {
-    console.log(`(${roundNumber}) Player Score: ${playerScore}`)
-    console.log(`(${roundNumber}) Computer Score: ${computerScore}`)
- }
-
-function updateScores(roundOutcome) {
-	if (roundOutcome === "tie") {
-		return
-	}
-	else if (roundOutcome === "win") {
-		document.querySelector(".player .score").textContent = ++playerScore;
-		return playerScore;
-	} else if (roundOutcome === "lose") {
-		document.querySelector(".computer .score").textContent = ++computerScore;
-		return computerScore;
-	}
-}
-
-function removeTransition(e) {
-	if (e.propertyName !== "scale") return;
-	this.classList.remove("clicked");
-}
-
-function resetGame() {
-	playerScore = 0;
-	document.querySelector(".player .score").textContent = playerScore;
-	computerScore = 0;
-	document.querySelector(".computer .score").textContent = computerScore;
-	roundNumber = 1;
-	document.querySelector(".round-number .counter").textContent = roundNumber - 1;
-	document.querySelector(".player .selects").textContent = "__";
-    document.querySelector(".computer .selects").textContent = "__";
-	document.querySelector(".round-outcome").textContent = "Outcome"
-	document.querySelector(".game").classList.remove("invisible"); // replace "invisible" with "hidden", try to use .toggle() instead too.
-	document.querySelector(".game-over-container").classList.add("invisible");
-}
-
-gameButtons.forEach(button => {
-	button.addEventListener("click", (e) => {
-		let playerSelection = e.target.id;
-		document.querySelector(`#${playerSelection}`).classList.add("clicked");
-		button.addEventListener("transitionend", removeTransition);
-		let roundOutcome = playRound(playerSelection, roundNumber);
-		updateScores(roundOutcome);
-		document.querySelector(".round-number .counter").textContent = roundNumber++;
-		checkIfFive(playerScore, computerScore);
-	})
-});
-
-function checkIfFive(playerScore, computerScore) {
-	if (playerScore >= 5) {
-		let winner = "player";
-		endGame(winner);
-	} else if (computerScore >= 5) {
-		let winner = "computer";
-		endGame(winner);
-	} else return
-}
-
-function endGame(winner) {
-	document.querySelector(".game").classList.add("invisible");
-	document.querySelector(".game-over-container").classList.remove("invisible");
-	if (winner === "player") {
-		document.querySelector(".winner").textContent = `Congrats, you won!`
-	} else {
-		document.querySelector(".winner").textContent = `Tough luck, you lost!`
-	}
-}
-
-resetButton.addEventListener("click", resetGame);
 
 // -------------------------------------------------------------------------------- //
 // --------------------     Calls & Event Listeners    ---------------------------- //
@@ -177,31 +46,105 @@ resetButton.addEventListener("click", resetGame);
 
 
 // -- On-Screen Content -- //
-
+startGameBtn.textContent = "play";
+welcomeMsg.classList.toggle("shrunk");
 
 
 /*
 PSEUDO
 
-On start:
-	button text is "play",
-	unhide welcome message;
-On button click: 
-	reset player scores,
-	reset round counter, 
-	reset computer choice, 
-	hide modal, 
-	unhide playground;
-Take user input from a button click;
-Check it against a random computer selection;
-Show computer choice;
-Increment players' and round counters;
-Show a result message;
-Once a player's score is 5: 
-	hide playground, 
-	hide welcome, 
-	button text is "play again",
-	unhide game-over, 
-	unhide modal;
 
+
+EVENT LISTENER startGameBtn ON CLICK
+	startNewGame()
+END EVENT LISTENER
+
+FUNCTION startNewGame()
+	roundCounter = 1;
+	userScore = 0;
+	computerScore = 0;
+	computerChoiceDisplay.classList = "hidden";
+	modal.classList.toggle("shrunk");
+	welcomeMsg.classList.toggle("shrunk");
+	playground.classList.toggle("hidden");
+	displayMessage([3, 2, 1, "fight"], #);
+END FUNCTION
+
+FUNCTION 
+
+FUNCTION displayMessage(msgArray, interval)
+	FOR (let el of msgArray)
+		message.textContent = el;
+		message.classList.toggle("hidden");
+		setTimeOut(() => message.classList.toggle("hidden"), (interval * 1000));
+	END FOR
+END FUNCTION
+
+
+FOR button OF gameButtons
+	EVENT LISTENER button MOUSE ENTER
+		button.classList.add("hover");
+	END EVENT LISTENER
+
+	EVENT LISTENER button MOUSE LEAVE
+		button.classList.remove(.hover);
+	END EVENT LISTENER
+
+	EVENT LISTENER button ON CLICK
+		handleUserChoice(e)
+	END EVENT LISTENER
+END FOR
+
+FUNCTION handleUserChoice(e)
+	let userChoice = e.target.classList.contains("button") ? e.target.id : e.target.parentElement.id;
+	showPlayerChoice(userChoice);
+	playRound(userChoice);
+END FUNCTION
+
+FUNCTION showPlayerChoice(userChoice)
+	let playerChoiceBtn = document.getElementByID(`${userChoice}`);
+	playerChoiceBtn.classList.add("selected");
+	setTimeOut(() => playerChoiceBtn.classList.remove("selected"), 3000);
+END FUNCTION
+
+FUNCTION playRound(userChoice)
+	let computerChoice = ["rock", "paper", "scissors"][Math.floor(Math.random() * (3))];
+	displayComputerChoice(computerChoice);
+	let outcome = userChoice === computerChoice ? "tie" : getWinner(userChoice, computerChoice);
+	displayMessage([outcome], #);
+	IF (outcome === "victory")
+		userProgress.value = ++userScore;
+	IF (outcome === "defeat")
+		computerProgress.value = ++computerScore;
+	END IF
+	roundDisplay.firstElementChild.textContent = ++roundCounter;
+	IF userScore >= 5 || computerScore >= 5
+		endGame(userScore > computerScore)
+END FUNCTION
+
+FUNCTION displayComputerChoice(computerChoice)
+	const computerDictionary = {
+		"rock" : "-back-fist", 
+		"paper" : "",
+		"scissors" : "-scissors",
+	}
+	computerChoiceDisplay.classList = `fa-regular fa-hand${computerDictionary[computerChoice]}`
+END FUNCTION
+
+FUNCTION getWinner(userChoice, computerChoice)
+	return {
+		"rock-btn" : (computerChoice === "scissors"),
+		"paper-btn" : (computerChoice === "rock"),
+		"scissors-btn" : (computerChoice === "paper"),
+	}[userChoice] ? "victory" : "defeat";
+END FUNCTION
+
+FUNCTION endGame(winnerBoolean)
+	gameOverMsg.lastElementChild.textContent = winnerBoolean ? "You Win!" : "You Lose!";
+	gameOverMsg.style.color = winnerBoolean ? "var(--text-primary)" : "red";
+	startGameBtn.textContent = "play again";
+	playground.classList.toggle("hidden");
+	gameOverMsg.classList.toggle("hidden")
+	modal.classList.toggle("hidden");
+END FUNCTION
 */
