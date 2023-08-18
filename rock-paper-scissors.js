@@ -34,7 +34,29 @@ const startGameBtn = document.getElementById("start-game-btn");
 
 
 // -- On-Screen Content -- //
+function startNewGame() {
+	roundCounter = 1;
+	userScore = 0;
+	computerScore = 0;
+	computerChoiceDisplay.classList = "shrunk";
+	modal.classList.toggle("shrunk");
+	displayMessage(3, 2, 1, "fight!");
+	setTimeout(() => message.classList.add("shrunk"), 4300);
+	welcomeMsg.classList.toggle("hidden");
+}
 
+function displayMessage(...msgArray) {
+	let i = 0;
+	const countdown = setInterval(() => {
+		// debugger
+		if (i === msgArray.length) {
+			clearInterval(countdown);
+		} else {
+			message.textContent = msgArray[i];
+			i++;
+		}
+	}, 1000);
+}
 
 
 // -------------------------------------------------------------------------------- //
@@ -46,37 +68,19 @@ const startGameBtn = document.getElementById("start-game-btn");
 
 
 // -- On-Screen Content -- //
-startGameBtn.textContent = "play";
-welcomeMsg.classList.toggle("shrunk");
+welcomeMsg.classList = "welcome headers";
+
+startGameBtn.addEventListener("click", startNewGame);
 
 
 /*
 PSEUDO
 
-
-
-EVENT LISTENER startGameBtn ON CLICK
-	startNewGame()
-END EVENT LISTENER
-
-FUNCTION startNewGame()
-	roundCounter = 1;
-	userScore = 0;
-	computerScore = 0;
-	computerChoiceDisplay.classList = "hidden";
-	modal.classList.toggle("shrunk");
-	welcomeMsg.classList.toggle("shrunk");
-	playground.classList.toggle("hidden");
-	displayMessage([3, 2, 1, "fight"], #);
-END FUNCTION
-
-FUNCTION 
-
 FUNCTION displayMessage(msgArray, interval)
 	FOR (let el of msgArray)
 		message.textContent = el;
-		message.classList.toggle("hidden");
-		setTimeOut(() => message.classList.toggle("hidden"), (interval * 1000));
+		message.classList.toggle("shrunk");
+		setTimeout(() => message.classList.toggle("shrunk"), (interval * 1000));
 	END FOR
 END FUNCTION
 
@@ -104,7 +108,7 @@ END FUNCTION
 FUNCTION showPlayerChoice(userChoice)
 	let playerChoiceBtn = document.getElementByID(`${userChoice}`);
 	playerChoiceBtn.classList.add("selected");
-	setTimeOut(() => playerChoiceBtn.classList.remove("selected"), 3000);
+	setTimeout(() => playerChoiceBtn.classList.remove("selected"), 3000);
 END FUNCTION
 
 FUNCTION playRound(userChoice)
@@ -143,8 +147,8 @@ FUNCTION endGame(winnerBoolean)
 	gameOverMsg.lastElementChild.textContent = winnerBoolean ? "You Win!" : "You Lose!";
 	gameOverMsg.style.color = winnerBoolean ? "var(--text-primary)" : "red";
 	startGameBtn.textContent = "play again";
-	playground.classList.toggle("hidden");
-	gameOverMsg.classList.toggle("hidden")
-	modal.classList.toggle("hidden");
+	startGameBtn.style.fontSize = "22px";
+	modal.classList.toggle("shrunk");
+	gameOverMsg.classList = "game-over headers";
 END FUNCTION
 */

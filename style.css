@@ -99,10 +99,16 @@ main {
 /* -------------------- Modal -------------------- */
 
 .modal {
-	flex: 1;
+	position: absolute;
+	z-index: 1;
+	height: 100%;
+	width: 100%;
+
 	display: grid;
 	grid-template-rows: repeat(3, 1fr);
 
+	background: repeating-conic-gradient(from 11.25deg, black 0deg 22.5deg, var(--bg-rays) 22.5deg 45deg);
+	background-color: black;
 }
 
 .headers {
