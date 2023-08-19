@@ -86,7 +86,7 @@ function showCountdown(...msgArray) {
 function showUserChoice(userChoice) {
 	let userChoiceBtn = document.getElementById(`${userChoice}-btn`);
 	userChoiceBtn.classList.add("selected");
-	setTimeout(() => userChoiceBtn.classList.remove("selected"), 500);
+	setTimeout(() => userChoiceBtn.classList.remove("selected"), 200);
 }
 
 function displayComputerChoice(computerChoice) {

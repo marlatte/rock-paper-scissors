@@ -14,7 +14,7 @@ button {
 	background-color: unset;
 	color: unset;
 
-	font-family: var(--font-body);
+	font-family: var(--main-font, --backup-fonts);
 	font-size: unset;
 }
 
@@ -24,6 +24,7 @@ button {
 
 :root {
 	--game-btn-bg: #4deeea;
+	--game-btn-selected: #0d8c8a;
 	--text-primary: #13e907;
 	--text-secondary: #649e61;
 	--comp-color: #f000ff;
@@ -55,7 +56,7 @@ body {
 	background-color: black;
 	background-repeat: no-repeat;
 	color: var(--text-primary);
-	font-family: var(--main-font), var(--backup-fonts);
+	font-family: var(--main-font, --backup-fonts);
 }
 
 .hidden {
@@ -199,7 +200,7 @@ a {
 	flex: 1;
 
 	display: grid;
-	grid-template-rows: 1fr 70px 1fr;
+	grid-template-rows: 1fr 90px 1fr;
 }
 
 /* -------------------- Computer Choice -------------------- */
@@ -253,9 +254,13 @@ a {
 
 	display: flex;
 	align-items: center;
-	gap: 5px;
 
 	border-radius: var(--prog-visual-width);
+}
+
+.spacer {
+	width: 5px;
+	height: var(--prog-visual-width);
 	background-color: white;
 }
 
@@ -320,6 +325,8 @@ button {
 	background-color: var(--game-btn-bg);
 	color: #000;
 	border-radius: var(--button-dimensions);
+
+	transition: all 0.1s 0.05s;
 }
 
 button i {
@@ -338,15 +345,19 @@ button#scissors-btn {
 	grid-area: scissors;
 }
 
-button:disabled {
+button.button:disabled {
 	background-color: #527a7a;
     color: #122121;
+	border: none;
 }
 
 button.button.selected {
 	background-color: unset;
-	border: 2px solid var(--text-primary);
-	color: var(--text-primary);
+	border: 2px solid var(--game-btn-selected);
+	color: var(--game-btn-selected);
+
+	transform: scale(1.1);
+	transition: all 0.1s;
 }
 
 .round-display {
@@ -396,15 +407,19 @@ button.button.selected {
 		margin: auto;
 	}
 
-	progress[value] {
+	.scoreboard {
 		--prog-visual-width: min(2vw, 20px);
 	}
 }
 
 @media (hover: hover) {
-	button:hover {
+	.modal button:hover {
+		border: 2px solid var(--text-primary);
+	}
+
+	.playground button:hover {
 		background-color: unset;
-		border: 2px solid greenyellow;
-		color: greenyellow;
+		border: 2px solid var(--game-btn-bg);
+		color: var(--game-btn-bg);
 	}
 }
