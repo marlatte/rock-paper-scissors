@@ -31,7 +31,7 @@ button {
 	--bg-rays: #0f0f0f;
 	--prog-bg: #262626;
 
-	--main-font: "grover";
+	--main-font: "bd-jupiter";
 	--backup-fonts: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	/* 
 	font-family: "grover";
@@ -56,7 +56,7 @@ body {
 	background-color: black;
 	background-repeat: no-repeat;
 	color: var(--text-primary);
-	font-family: var(--main-font, --backup-fonts);
+	font-family: var(--main-font), var(--backup-fonts);
 }
 
 .hidden {
@@ -68,10 +68,6 @@ body {
 	transition: all 1s;
 }
 
-h1 {
-	font-size: 32px;
-}
-
 .fa-hand-scissors {
 	transform: rotate(90deg) scaleY(-1);
 }
@@ -79,14 +75,6 @@ h1 {
 /* -------------------- /Utilities & Universals -------------------- */
 
 /* -------------------- Content -------------------- */
-/* -------------------- Header -------------------- */
-
-header {
-	display: none;
-}
-
-/* -------------------- /Header -------------------- */
-
 /* -------------------- Main -------------------- */
 
 main {
@@ -131,11 +119,11 @@ main {
 }
 
 h2 {
-	font-size: calc(100vw / 14);
+	font-size: calc(100vw / 11);
 }
 
 h3 {
-	font-size: calc(100vw/ 17);
+	font-size: calc(100vw/ 13);
 	color: var(--text-secondary);
 }
 
@@ -173,6 +161,7 @@ footer {
 	gap: 10px;
 
 	text-align: center;
+	font-size: 22px;
 }
 
 #my-name {
@@ -245,7 +234,7 @@ a {
 }
 
 #message {
-	font-size: min(calc(100vw / 9), 60px);
+	font-size: min(calc(100vw / 9), 70px);
 }
 
 .scoreboard {
@@ -355,11 +344,7 @@ button#scissors-btn {
 }
 
 button.button.selected {
-	background-color: unset;
-	border: 2px solid var(--game-btn-selected);
-	color: var(--game-btn-selected);
-
-	transform: scale(1.1);
+	transform: scale(0.9);
 	transition: all 0.1s;
 }
 
@@ -380,7 +365,7 @@ button.button.selected {
 
 .round-display h3 {
 	margin-bottom: calc(0.3 * var(--round-display-dimensions));
-	font-size: calc(0.22 * var(--round-display-dimensions));
+	font-size: calc(0.3 * var(--round-display-dimensions));
 	color: unset;
 }
 

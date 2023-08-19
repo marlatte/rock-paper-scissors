@@ -123,10 +123,12 @@ function updateScores(outcome) {
 
 function endGame(winnerBoolean) {
 	gameOverMsg.lastElementChild.textContent = winnerBoolean ? "You Win!" : "You Lose!";
+	gameOverMsg.lastElementChild.style.color = winnerBoolean ? "var(--text-secondary)" : "#f99";
 	gameOverMsg.style.color = winnerBoolean ? "var(--text-primary)" : "red";
 	gameOverMsg.classList = "game-over headers";
 	startGameBtn.textContent = "play again";
-	startGameBtn.style.fontSize = "22px";
+	startGameBtn.style.fontSize = "32px";
+	startGameBtn.style.paddingTop = "0px";
 	modal.classList.toggle("shrunk");
 	message.textContent = "";
 	computerChoiceDisplay.classList = "shrunk";
