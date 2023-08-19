@@ -338,18 +338,12 @@ button#scissors-btn {
 	grid-area: scissors;
 }
 
-.hover {
-	background-color: unset;
-	border: 2px solid greenyellow;
-	color: greenyellow;
-}
-
 button:disabled {
 	background-color: #527a7a;
     color: #122121;
 }
 
-button.selected {
+button.button.selected {
 	background-color: unset;
 	border: 2px solid var(--text-primary);
 	color: var(--text-primary);
@@ -404,5 +398,13 @@ button.selected {
 
 	progress[value] {
 		--prog-visual-width: min(2vw, 20px);
+	}
+}
+
+@media (hover: hover) {
+	button:hover {
+		background-color: unset;
+		border: 2px solid greenyellow;
+		color: greenyellow;
 	}
 }
