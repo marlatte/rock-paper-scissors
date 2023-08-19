@@ -42,6 +42,7 @@ function playRound(userChoice) {
 	let outcome = userChoice === computerChoice ? "tie" : getWinner(userChoice, computerChoice);
 	displayOutcome(outcome);
 	updateScores(outcome);
+	roundDisplay.firstElementChild.textContent = ++roundCounter;
 	if (userScore >= 5 || computerScore >= 5) {
 		gameButtons.forEach((button) => button.disabled = true)
 		setTimeout(() => endGame(userScore > computerScore), 400);
@@ -67,7 +68,7 @@ function startNewGame() {
 		message.classList.add("shrunk");
 		gameButtons.forEach((button) => button.disabled = false);
 	}, 3000);
-	setTimeout(() => welcomeMsg.classList.toggle("hidden"), 1000);
+	setTimeout(() => welcomeMsg.classList = "welcome headers hidden", 1000);
 }
 
 function showCountdown(...msgArray) {
@@ -105,11 +106,9 @@ function updateScores(outcome) {
 	if (outcome === "victory") {
 		userProgress.value = ++userScore;
 		userProgress.textContent = userScore;
-		roundDisplay.firstElementChild.textContent = ++roundCounter;
 	} else if (outcome === "defeat") {
 		computerProgress.value = ++computerScore;
 		computerProgress.textContent = computerScore;
-		roundDisplay.firstElementChild.textContent = ++roundCounter;
 	} else if (outcome === "reset") {
 		userScore = 0;
 		userProgress.value = 0;
