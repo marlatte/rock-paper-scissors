@@ -124,6 +124,9 @@ main {
 	place-content: center;
 
 	text-align: center;
+}
+
+.welcome {
 	transition: all 1s;
 }
 
@@ -345,7 +348,7 @@ button#scissors-btn {
 	grid-area: scissors;
 }
 
-button.button:disabled {
+.buttons button.button:disabled {
 	background-color: #527a7a;
     color: #122121;
 	border: none;

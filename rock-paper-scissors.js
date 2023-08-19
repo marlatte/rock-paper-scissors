@@ -124,10 +124,10 @@ function updateScores(outcome) {
 function endGame(winnerBoolean) {
 	gameOverMsg.lastElementChild.textContent = winnerBoolean ? "You Win!" : "You Lose!";
 	gameOverMsg.style.color = winnerBoolean ? "var(--text-primary)" : "red";
+	gameOverMsg.classList = "game-over headers";
 	startGameBtn.textContent = "play again";
 	startGameBtn.style.fontSize = "22px";
 	modal.classList.toggle("shrunk");
-	gameOverMsg.classList = "game-over headers";
 	message.textContent = "";
 	computerChoiceDisplay.classList = "shrunk";
 }
@@ -137,11 +137,7 @@ function endGame(winnerBoolean) {
 // -------------------------------------------------------------------------------- //
 
 
-// -- Behind the Scenes -- //
-
-
-// -- On-Screen Content -- //
-welcomeMsg.classList = "welcome headers";
+setTimeout(() => welcomeMsg.classList = "welcome headers", 200);
 
 startGameBtn.addEventListener("click", () => {
 	startGameBtn.style.scale = 1.1;
