@@ -4,7 +4,7 @@
 
 
 // -- Behind the Scenes -- //
-let roundCounter = 1,
+let roundCounter = 0,
 	userScore = 0,
 	computerScore = 0;
 
@@ -40,13 +40,15 @@ function playRound(userChoice) {
 	let computerChoice = ["rock", "paper", "scissors"][Math.floor(Math.random() * (3))];
 	displayComputerChoice(computerChoice);
 	let outcome = userChoice === computerChoice ? "tie" : getWinner(userChoice, computerChoice);
-	displayOutcome(outcome);
-	updateScores(outcome);
 	roundDisplay.firstElementChild.textContent = ++roundCounter;
-	if (userScore >= 5 || computerScore >= 5) {
-		gameButtons.forEach((button) => button.disabled = true)
-		setTimeout(() => endGame(userScore > computerScore), 400);
-	}
+	displayOutcome(outcome);
+	setTimeout(() => {
+		updateScores(outcome);
+		if (userScore >= 5 || computerScore >= 5) {
+			gameButtons.forEach((button) => button.disabled = true)
+			setTimeout(() => endGame(userScore > computerScore), 400);
+		}
+	}, 500);
 }
 
 function getWinner(userChoice, computerChoice) {
@@ -74,12 +76,8 @@ function startNewGame() {
 function showCountdown(...msgArray) {
 	let i = 0;
 	const countdown = setInterval(() => {
-		if (i === msgArray.length) {
-			clearInterval(countdown);
-		} else {
-			message.textContent = msgArray[i];
-			i++;
-		}
+		if (i === msgArray.length) clearInterval(countdown); 
+		else message.textContent = msgArray[i++];
 	}, 700);
 }
 
@@ -90,16 +88,24 @@ function showUserChoice(userChoice) {
 }
 
 function displayComputerChoice(computerChoice) {
-	computerChoiceDisplay.classList = `fa-regular fa-hand${{
-		"rock": "-back-fist",
-		"paper": "",
-		"scissors": "-scissors",
-	}[computerChoice]}`
+	computerChoiceDisplay.classList.add("hidden");
+	setTimeout(() => {
+		computerChoiceDisplay.classList.remove("hidden");
+		computerChoiceDisplay.classList = `fa-regular fa-hand${{
+			"rock": "-back-fist",
+			"paper": "",
+			"scissors": "-scissors",
+		}[computerChoice]}`
+	}, 200);
 }
 
 function displayOutcome(outcome) {
-	message.textContent = outcome;
-	message.classList.remove("shrunk");
+	message.classList.add("hidden");
+	setTimeout(() => {
+		message.classList.remove("hidden");
+		message.textContent = outcome;
+		message.classList.remove("shrunk");
+	}, 530); // Slightly longer delay than in playRound to make them appear at the same time.
 }
 
 function updateScores(outcome) {
@@ -116,8 +122,8 @@ function updateScores(outcome) {
 		computerScore = 0
 		computerProgress.value = 0;
 		computerProgress.textContent = 0;
-		roundCounter = 1;
-		roundDisplay.firstElementChild.textContent = 1;
+		roundCounter = 0;
+		roundDisplay.firstElementChild.textContent = 0;
 	}
 }
 
@@ -143,8 +149,8 @@ setTimeout(() => welcomeMsg.classList = "welcome headers", 200);
 
 startGameBtn.addEventListener("click", () => {
 	startGameBtn.style.scale = 1.1;
-	setTimeout(() => startGameBtn.style.scale = 1, 100);
-	setTimeout(startNewGame, 130);
+	setTimeout(() => startGameBtn.style.scale = 1, 200);
+	setTimeout(startNewGame, 250);
 });
 
 gameButtons.forEach((button) => button.addEventListener("click", handleUserChoice)) 
