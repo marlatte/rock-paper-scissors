@@ -203,7 +203,7 @@ a {
 }
 
 #comp-choice {
-	--comp-choice-dimensions: min(50vw, 200px);
+	--comp-choice-dimensions: min(30vw, 200px);
 
 	width: var(--comp-choice-dimensions);
 	height: var(--comp-choice-dimensions);
