@@ -1,8 +1,26 @@
-# rock-paper-scissors
-The Odin Project rock paper scissors game
+# Rock Paper Scissors
 
-My first JS game in my portfolio. Initial version was played in the console, revised with a  GUI as I moved through those lessons, and later revised again after peer-review.
+My first JavaScript game! The initial version was played in the console, then I added a GUI as I moved through the lessons, and later refactored again after peer-review.
 
-First version is in the `original-rps.js` file.
+## Demo
 
-👉 [Live Demo](https://marlatte.github.io/rock-paper-scissors/) 👈
+👉 [Live Preview](https://marlatte.github.io/rock-paper-scissors/) 👈
+
+## Skills Demonstrated
+
+- Code organization
+  - Before I learned about modules, this was my attempt at keeping things readable and maintainable.
+  - Categorized sections as `Variables`, `Functions`, or `Event Listeners`
+    - Each section is divided into `Behind the scenes` and `On-screen content` (before I knew the terms `gameController` and `screenController`).
+- Refactoring
+  - Initial refactoring done to give the console game a face, adding event listeners and the like to make an interactive UI.
+  - After peer-review, refactored again for efficiency, responsiveness, and general UX improvements.
+
+## Acknowledgements
+
+- [The Odin Project](https://www.theodinproject.com/lessons/foundations-revisiting-rock-paper-scissors)
+- [TlonUqbar](https://github.com/TlonUqbar) gave great feedback that really helped me develop the UI
+
+## Built with
+
+[![My Skills](https://skillicons.dev/icons?i=js,html,css,github)](https://skillicons.dev)
